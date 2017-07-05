@@ -6,6 +6,7 @@
 //==============================================================================
 
 #include "GLWidget.h"
+#include <cmath>
 
 GLWidget::GLWidget(QWidget* parent) :
         QGLWidget(parent), xRotation(0), yRotation(0), zRotation(0)
@@ -18,17 +19,49 @@ GLWidget::~GLWidget()
 
 void GLWidget::initializeGL()
 {
-    // TODO void GLWidget::initializeGL()
+    glClearColor(1.0, 1.0, 1.0, 0.0);
+    glEnable(GL_DEPTH_TEST);
 }
 
 void GLWidget::paintGL()
 {
-    // TODO void GLWidget::paintGL()
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glLoadIdentity();
+    glTranslatef(0.0, 0.0, -10.0);
+    glRotatef(xRotation, 1.0, 0.0, 0.0);
+    glRotatef(yRotation, 0.0, 1.0, 0.0);
+    glRotatef(zRotation, 0.0, 0.0, 1.0);
+
+    glLineWidth(2.0);
+    glColor3f(1.0, 0.0, 0.0);
+    glBegin(GL_LINES);
+    glVertex3f(0.0, 0.0, 0.0);
+    glVertex3f(10.0, 0.0, 0.0);
+    glEnd();
+
+    glLineWidth(2.0);
+    glColor3f(0.0, 1.0, 0.0);
+    glBegin(GL_LINES);
+    glVertex3f(0.0, 0.0, 0.0);
+    glVertex3f(0.0, 10.0, 0.0);
+    glEnd();
+
+    glLineWidth(2.0);
+    glColor3f(0.0, 0.0, 1.0);
+    glBegin(GL_LINES);
+    glVertex3f(0.0, 0.0, 0.0);
+    glVertex3f(0.0, 0.0, 10.0);
+    glEnd();
 }
 
 void GLWidget::resizeGL(int width, int height)
 {
-    // TODO void GLWidget::resizeGL(int width, int height)
+    int side = qMin(width, height);
+    glViewport((width - side) / 2, (height - side) / 2, side, side);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glOrtho(-10.0, +10.0, -10.0, +10.0, -10.0 * sqrt(2.0), +10.0 * sqrt(2.0));
+    glMatrixMode(GL_MODELVIEW);
 }
 
 void GLWidget::mousePressEvent(QMouseEvent* event)

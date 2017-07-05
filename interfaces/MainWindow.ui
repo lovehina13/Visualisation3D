@@ -17,6 +17,12 @@
    <layout class="QGridLayout" name="gridLayoutMainWindow">
     <item row="0" column="0" rowspan="2">
      <widget class="GLWidget" name="glWidget" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="minimumSize">
        <size>
         <width>400</width>

@@ -15,9 +15,12 @@ RCC_DIR = objects
 UI_DIR = objects
 QT += opengl
 
-# HEADERS +=
-# SOURCES +=
-# FORMS +=
+HEADERS += include/GLWidget.h \
+           include/MainWindow.h
+SOURCES += source/GLWidget.cpp \
+           source/MainWindow.cpp \
+           source/Visualisation3D.cpp
+FORMS += interfaces/MainWindow.ui
 # RESOURCES +=
 
 QMAKE_CXXFLAGS += -std=c++11 -Wall -Wextra

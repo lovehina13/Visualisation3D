@@ -9,18 +9,21 @@
 #include <cmath>
 
 GLWidget::GLWidget(QWidget* parent) :
-        QGLWidget(parent), xRotation(0), yRotation(0), zRotation(0)
+        QGLWidget(parent), xRotation(0), yRotation(0), zRotation(0), skyBox(new SkyBox())
 {
 }
 
 GLWidget::~GLWidget()
 {
+    delete skyBox;
 }
 
 void GLWidget::initializeGL()
 {
     glClearColor(1.0, 1.0, 1.0, 0.0);
     glEnable(GL_DEPTH_TEST);
+
+    skyBox->initialize();
 }
 
 void GLWidget::paintGL()
@@ -31,6 +34,8 @@ void GLWidget::paintGL()
     glRotatef(xRotation, 1.0, 0.0, 0.0);
     glRotatef(yRotation, 0.0, 1.0, 0.0);
     glRotatef(zRotation, 0.0, 0.0, 1.0);
+
+    skyBox->paint();
 
     glLineWidth(2.0);
     glColor3f(1.0, 0.0, 0.0);

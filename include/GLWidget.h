@@ -8,6 +8,7 @@
 #ifndef GLWIDGET_H
 #define GLWIDGET_H
 
+#include "SkyBox.h"
 #include <QGLWidget>
 #include <QMouseEvent>
 #include <QPoint>
@@ -43,6 +44,7 @@ private:
     int yRotation;
     int zRotation;
     QPoint lastPosition;
+    SkyBox* skyBox;
 };
 
 #endif /* GLWIDGET_H */

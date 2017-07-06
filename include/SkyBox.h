@@ -25,6 +25,11 @@ protected:
 
 private:
     GLuint cubeMapTextureID;
+
+    enum skyBoxFaces
+    {
+        FACE_RIGHT, FACE_LEFT, FACE_TOP, FACE_BOTTOM, FACE_FRONT, FACE_BACK
+    };
 };
 
 #endif /* SKYBOX_H */

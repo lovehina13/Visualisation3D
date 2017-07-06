@@ -23,6 +23,6 @@ SOURCES += source/GLWidget.cpp \
            source/SkyBox.cpp \
            source/Visualisation3D.cpp
 FORMS += interfaces/MainWindow.ui
-# RESOURCES +=
+RESOURCES += ressources/Ressources.qrc
 
 QMAKE_CXXFLAGS += -std=c++11 -Wall -Wextra

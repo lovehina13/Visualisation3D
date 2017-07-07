@@ -70,5 +70,51 @@ void SkyBox::finalize()
 
 void SkyBox::drawSkyBox()
 {
-    // TODO void SkyBox::drawSkyBox()
+    float n = -5.0;
+    float p = +5.0;
+
+    glBindTexture(GL_TEXTURE_CUBE_MAP, cubeMapTextureID);
+    glColor3f(1.0, 1.0, 1.0);
+
+    glBegin(GL_QUADS); // FACE_RIGHT
+    glTexCoord3f(p, p, p); glVertex3f(p, n, p);
+    glTexCoord3f(p, n, p); glVertex3f(p, p, p);
+    glTexCoord3f(p, n, n); glVertex3f(p, p, n);
+    glTexCoord3f(p, p, n); glVertex3f(p, n, n);
+    glEnd();
+
+    glBegin(GL_QUADS); // FACE_LEFT
+    glTexCoord3f(n, p, n); glVertex3f(n, n, n);
+    glTexCoord3f(n, n, n); glVertex3f(n, p, n);
+    glTexCoord3f(n, n, p); glVertex3f(n, p, p);
+    glTexCoord3f(n, p, p); glVertex3f(n, n, p);
+    glEnd();
+
+    glBegin(GL_QUADS); // FACE_TOP
+    glTexCoord3f(n, p, n); glVertex3f(n, p, p);
+    glTexCoord3f(n, p, p); glVertex3f(n, p, n);
+    glTexCoord3f(p, p, p); glVertex3f(p, p, n);
+    glTexCoord3f(p, p, n); glVertex3f(p, p, p);
+    glEnd();
+
+    glBegin(GL_QUADS); // FACE_BOTTOM
+    glTexCoord3f(n, n, p); glVertex3f(n, n, n);
+    glTexCoord3f(n, n, n); glVertex3f(n, n, p);
+    glTexCoord3f(p, n, n); glVertex3f(p, n, p);
+    glTexCoord3f(p, n, p); glVertex3f(p, n, n);
+    glEnd();
+
+    glBegin(GL_QUADS); // FACE_FRONT
+    glTexCoord3f(n, p, p); glVertex3f(n, n, p);
+    glTexCoord3f(n, n, p); glVertex3f(n, p, p);
+    glTexCoord3f(p, n, p); glVertex3f(p, p, p);
+    glTexCoord3f(p, p, p); glVertex3f(p, n, p);
+    glEnd();
+
+    glBegin(GL_QUADS); // FACE_BACK
+    glTexCoord3f(p, p, n); glVertex3f(p, n, n);
+    glTexCoord3f(p, n, n); glVertex3f(p, p, n);
+    glTexCoord3f(n, n, n); glVertex3f(n, p, n);
+    glTexCoord3f(n, p, n); glVertex3f(n, n, n);
+    glEnd();
 }

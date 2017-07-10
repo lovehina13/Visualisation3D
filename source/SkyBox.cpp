@@ -6,6 +6,7 @@
 //==============================================================================
 
 #include "SkyBox.h"
+#include <cmath>
 #include <QGLWidget>
 #include <QImage>
 
@@ -57,9 +58,11 @@ void SkyBox::initialize()
 void SkyBox::paint()
 {
     glEnable(GL_TEXTURE_CUBE_MAP);
+    glDepthFunc(GL_LEQUAL);
 
     drawSkyBox();
 
+    glDepthFunc(GL_GEQUAL);
     glDisable(GL_TEXTURE_CUBE_MAP);
 }
 
@@ -70,8 +73,8 @@ void SkyBox::finalize()
 
 void SkyBox::drawSkyBox()
 {
-    float n = -5.0;
-    float p = +5.0;
+    float n = -10.0 * sqrt(2.0);
+    float p = +10.0 * sqrt(2.0);
 
     glBindTexture(GL_TEXTURE_CUBE_MAP, cubeMapTextureID);
     glColor3f(1.0, 1.0, 1.0);

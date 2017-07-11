@@ -17,9 +17,11 @@ QT += opengl
 
 HEADERS += include/GLWidget.h \
            include/MainWindow.h \
+           include/Picture.h \
            include/SkyBox.h
 SOURCES += source/GLWidget.cpp \
            source/MainWindow.cpp \
+           source/Picture.cpp \
            source/SkyBox.cpp \
            source/Visualisation3D.cpp
 FORMS += interfaces/MainWindow.ui

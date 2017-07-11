@@ -23,9 +23,9 @@ MainWindow::MainWindow(QWidget* parent) :
 
     // Sliders to widget
     connect(this->ui->sliderRotationX, SIGNAL(valueChanged(int)), this->ui->glWidget,
-            SLOT(setXRotation(int)));
-    connect(this->ui->sliderRotationY, SIGNAL(valueChanged(int)), this->ui->glWidget,
             SLOT(setYRotation(int)));
+    connect(this->ui->sliderRotationY, SIGNAL(valueChanged(int)), this->ui->glWidget,
+            SLOT(setXRotation(int)));
     connect(this->ui->sliderRotationZ, SIGNAL(valueChanged(int)), this->ui->glWidget,
             SLOT(setZRotation(int)));
 
@@ -39,24 +39,24 @@ MainWindow::MainWindow(QWidget* parent) :
 
     // Spin boxes to widget
     connect(this->ui->spinBoxRotationX, SIGNAL(valueChanged(int)), this->ui->glWidget,
-            SLOT(setXRotation(int)));
-    connect(this->ui->spinBoxRotationY, SIGNAL(valueChanged(int)), this->ui->glWidget,
             SLOT(setYRotation(int)));
+    connect(this->ui->spinBoxRotationY, SIGNAL(valueChanged(int)), this->ui->glWidget,
+            SLOT(setXRotation(int)));
     connect(this->ui->spinBoxRotationZ, SIGNAL(valueChanged(int)), this->ui->glWidget,
             SLOT(setZRotation(int)));
 
     // Widget to sliders
-    connect(this->ui->glWidget, SIGNAL(xRotationChanged(int)), this->ui->sliderRotationX,
+    connect(this->ui->glWidget, SIGNAL(xRotationChanged(int)), this->ui->sliderRotationY,
             SLOT(setValue(int)));
-    connect(this->ui->glWidget, SIGNAL(yRotationChanged(int)), this->ui->sliderRotationY,
+    connect(this->ui->glWidget, SIGNAL(yRotationChanged(int)), this->ui->sliderRotationX,
             SLOT(setValue(int)));
     connect(this->ui->glWidget, SIGNAL(zRotationChanged(int)), this->ui->sliderRotationZ,
             SLOT(setValue(int)));
 
     // Widget to spin boxes
-    connect(this->ui->glWidget, SIGNAL(xRotationChanged(int)), this->ui->spinBoxRotationX,
+    connect(this->ui->glWidget, SIGNAL(xRotationChanged(int)), this->ui->spinBoxRotationY,
             SLOT(setValue(int)));
-    connect(this->ui->glWidget, SIGNAL(yRotationChanged(int)), this->ui->spinBoxRotationY,
+    connect(this->ui->glWidget, SIGNAL(yRotationChanged(int)), this->ui->spinBoxRotationX,
             SLOT(setValue(int)));
     connect(this->ui->glWidget, SIGNAL(zRotationChanged(int)), this->ui->spinBoxRotationZ,
             SLOT(setValue(int)));

@@ -30,7 +30,13 @@ protected:
 private:
     int width;
     int height;
-    GLuint textureID;
+    int depth;
+    GLuint cubeMapTextureID;
+
+    enum pictureFaces
+    {
+        FACE_RIGHT, FACE_LEFT, FACE_TOP, FACE_BOTTOM, FACE_FRONT, FACE_BACK
+    };
 };
 
 #endif /* PICTURE_H */

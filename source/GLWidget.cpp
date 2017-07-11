@@ -6,7 +6,6 @@
 //==============================================================================
 
 #include "GLWidget.h"
-#include <cmath>
 #include <QString>
 
 GLWidget::GLWidget(QWidget* parent) :
@@ -96,7 +95,7 @@ void GLWidget::resizeGL(int width, int height)
     glViewport((width - side) / 2, (height - side) / 2, side, side);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(-10.0, +10.0, -10.0, +10.0, -10.0 * sqrt(2.0) - 1.0, +10.0 * sqrt(2.0) + 1.0);
+    glOrtho(-10.0, +10.0, -10.0, +10.0, -100.0, +100.0);
     glMatrixMode(GL_MODELVIEW);
 }
 

@@ -7,6 +7,7 @@
 
 #include "GLWidget.h"
 #include <cmath>
+#include <QString>
 
 GLWidget::GLWidget(QWidget* parent) :
         QGLWidget(parent), xRotation(0), yRotation(0), zRotation(0), skyBox(new SkyBox())
@@ -16,6 +17,24 @@ GLWidget::GLWidget(QWidget* parent) :
 GLWidget::~GLWidget()
 {
     delete skyBox;
+
+    removePictures();
+}
+
+void GLWidget::addPicture(Picture* picture)
+{
+    pictures.append(picture);
+}
+
+void GLWidget::removePictures()
+{
+    for (QList<Picture*>::const_iterator itPicture = pictures.begin(); itPicture != pictures.end();
+            itPicture++)
+    {
+        delete (*itPicture);
+    }
+
+    pictures.clear();
 }
 
 void GLWidget::initializeGL()
@@ -24,6 +43,12 @@ void GLWidget::initializeGL()
     glEnable(GL_DEPTH_TEST);
 
     skyBox->initialize();
+
+    for (QList<Picture*>::const_iterator itPicture = pictures.begin(); itPicture != pictures.end();
+            itPicture++)
+    {
+        (*itPicture)->initialize(QString());
+    }
 }
 
 void GLWidget::paintGL()
@@ -57,6 +82,12 @@ void GLWidget::paintGL()
     glVertex3f(0.0, 0.0, 0.0);
     glVertex3f(0.0, 0.0, 10.0);
     glEnd();
+
+    for (QList<Picture*>::const_iterator itPicture = pictures.begin(); itPicture != pictures.end();
+            itPicture++)
+    {
+        (*itPicture)->paint();
+    }
 }
 
 void GLWidget::resizeGL(int width, int height)

@@ -8,8 +8,10 @@
 #ifndef GLWIDGET_H
 #define GLWIDGET_H
 
+#include "Picture.h"
 #include "SkyBox.h"
 #include <QGLWidget>
+#include <QList>
 #include <QMouseEvent>
 #include <QPoint>
 #include <QWidget>
@@ -21,6 +23,9 @@ class GLWidget : public QGLWidget
 public:
     explicit GLWidget(QWidget* parent = 0);
     virtual ~GLWidget();
+
+    void addPicture(Picture* picture);
+    void removePictures();
 
 protected:
     void initializeGL();
@@ -45,6 +50,7 @@ private:
     int zRotation;
     QPoint lastPosition;
     SkyBox* skyBox;
+    QList<Picture*> pictures;
 };
 
 #endif /* GLWIDGET_H */

@@ -24,6 +24,9 @@ public:
     explicit MainWindow(QWidget* parent = 0);
     virtual ~MainWindow();
 
+public slots:
+    void on_actionCharger_triggered();
+
 private:
     Ui::MainWindow* ui;
 };

@@ -7,11 +7,16 @@
 
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
+#include "Picture.h"
+#include <QFileDialog>
+#include <QString>
 
 MainWindow::MainWindow(QWidget* parent) :
         QMainWindow(parent), ui(new Ui::MainWindow)
 {
     this->ui->setupUi(this);
+
+    connect(this->ui->actionQuitter, SIGNAL(triggered()), this, SLOT(close()));
 
     // Sliders to spin boxes
     connect(this->ui->sliderRotationX, SIGNAL(valueChanged(int)), this->ui->spinBoxRotationX,
@@ -65,4 +70,20 @@ MainWindow::MainWindow(QWidget* parent) :
 MainWindow::~MainWindow()
 {
     delete this->ui;
+}
+
+void MainWindow::on_actionCharger_triggered()
+{
+    QString fileName = QFileDialog::getOpenFileName(this,
+            QString::fromUtf8("Sélection d'un fichier image"), 0,
+            QString::fromUtf8("Fichier image (*.bmp *.jpg *.jpeg *.png)"));
+    if (fileName.isEmpty())
+        return;
+
+    Picture* picture = new Picture();
+    picture->initialize(fileName);
+
+    this->ui->glWidget->removePictures();
+    this->ui->glWidget->addPicture(picture);
+    this->ui->glWidget->updateGL();
 }

@@ -38,6 +38,9 @@ public slots:
     void setXRotation(int angle);
     void setYRotation(int angle);
     void setZRotation(int angle);
+    void setDisplayWidth(int size);
+    void setDisplayHeight(int size);
+    void setDisplayDepth(int size);
 
 signals:
     void xRotationChanged(int angle);

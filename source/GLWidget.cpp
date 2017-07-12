@@ -163,3 +163,33 @@ void GLWidget::setZRotation(int angle)
         updateGL();
     }
 }
+
+void GLWidget::setDisplayWidth(int size)
+{
+    for (QList<Picture*>::const_iterator itPicture = pictures.begin(); itPicture != pictures.end();
+            itPicture++)
+    {
+        (*itPicture)->setDisplayWidth((float) size / 10.0);
+    }
+    updateGL();
+}
+
+void GLWidget::setDisplayHeight(int size)
+{
+    for (QList<Picture*>::const_iterator itPicture = pictures.begin(); itPicture != pictures.end();
+            itPicture++)
+    {
+        (*itPicture)->setDisplayHeight((float) size / 10.0);
+    }
+    updateGL();
+}
+
+void GLWidget::setDisplayDepth(int size)
+{
+    for (QList<Picture*>::const_iterator itPicture = pictures.begin(); itPicture != pictures.end();
+            itPicture++)
+    {
+        (*itPicture)->setDisplayDepth((float) size / 10.0);
+    }
+    updateGL();
+}

@@ -17,6 +17,10 @@ public:
     explicit Picture();
     virtual ~Picture();
 
+    void setDisplayWidth(float size);
+    void setDisplayHeight(float size);
+    void setDisplayDepth(float size);
+
     void initialize(QString fileName);
     void paint();
     void finalize();
@@ -28,9 +32,11 @@ protected:
     void drawPicture();
 
 private:
-    int width;
-    int height;
-    int depth;
+    int pictureWidth;
+    int pictureHeight;
+    float displayWidth;
+    float displayHeight;
+    float displayDepth;
     GLuint cubeMapTextureID;
 
     enum pictureFaces

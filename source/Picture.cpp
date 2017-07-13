@@ -7,7 +7,6 @@
 
 #include "Picture.h"
 #include <QGLWidget>
-#include <QImage>
 
 Picture::Picture() :
         QGLFunctions(), pictureWidth(0), pictureHeight(0), displayWidth(0.0), displayHeight(0.0),
@@ -38,31 +37,16 @@ void Picture::setDisplayDepth(float size)
 
 void Picture::initialize(QString fileName)
 {
-    GLenum cubeMapTarget[6] = {GL_TEXTURE_CUBE_MAP_POSITIVE_X, GL_TEXTURE_CUBE_MAP_NEGATIVE_X,
-            GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GL_TEXTURE_CUBE_MAP_NEGATIVE_Y,
-            GL_TEXTURE_CUBE_MAP_POSITIVE_Z, GL_TEXTURE_CUBE_MAP_NEGATIVE_Z};
-
-    QImage textureImage = QGLWidget::convertToGLFormat(QImage(fileName));
+    textureImage = QGLWidget::convertToGLFormat(QImage(fileName));
 
     glGenTextures(1, &cubeMapTextureID);
 
-    glBindTexture(GL_TEXTURE_CUBE_MAP, cubeMapTextureID);
     if (textureImage.bits())
     {
         pictureWidth = textureImage.width();
         pictureHeight = textureImage.height();
-        for (int face = 0; face < 6; face++)
-        {
-            glTexImage2D(cubeMapTarget[face], 0, GL_RGBA, textureImage.width(),
-                    textureImage.height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, textureImage.bits());
-        }
+        initializeFaces(0, pictureWidth, 0, pictureHeight);
     }
-
-    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    // glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_REPEAT);
 }
 
 void Picture::paint()
@@ -87,6 +71,26 @@ float Picture::widthRatio()
 float Picture::heightRatio()
 {
     return (float) pictureHeight / (float) qMax(pictureWidth, pictureHeight);
+}
+
+void Picture::initializeFaces(int minWidth, int maxWidth, int minHeight, int maxHeight)
+{
+    GLenum cubeMapTarget[6] = {GL_TEXTURE_CUBE_MAP_POSITIVE_X, GL_TEXTURE_CUBE_MAP_NEGATIVE_X,
+            GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GL_TEXTURE_CUBE_MAP_NEGATIVE_Y,
+            GL_TEXTURE_CUBE_MAP_POSITIVE_Z, GL_TEXTURE_CUBE_MAP_NEGATIVE_Z};
+
+    glBindTexture(GL_TEXTURE_CUBE_MAP, cubeMapTextureID);
+    for (int face = 0; face < 6; face++)
+    {
+        glTexImage2D(cubeMapTarget[face], 0, GL_RGBA, textureImage.width(), textureImage.height(),
+                0, GL_RGBA, GL_UNSIGNED_BYTE, textureImage.bits());
+    }
+
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    // glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_REPEAT);
 }
 
 void Picture::drawPicture()

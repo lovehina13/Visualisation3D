@@ -9,6 +9,7 @@
 #define PICTURE_H
 
 #include <QGLFunctions>
+#include <QImage>
 #include <QString>
 
 class Picture : public QGLFunctions
@@ -29,6 +30,7 @@ protected:
     float widthRatio();
     float heightRatio();
 
+    void initializeFaces(int minWidth, int maxWidth, int minHeight, int maxHeight);
     void drawPicture();
 
 private:
@@ -37,6 +39,7 @@ private:
     float displayWidth;
     float displayHeight;
     float displayDepth;
+    QImage textureImage;
     GLuint cubeMapTextureID;
 
     enum pictureFaces

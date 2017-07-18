@@ -37,7 +37,7 @@ void Picture::setDisplayDepth(float size)
 
 void Picture::initialize(QString fileName)
 {
-    textureImage = QGLWidget::convertToGLFormat(QImage(fileName));
+    textureImage = QImage(fileName);
 
     glGenTextures(1, &cubeMapTextureID);
 
@@ -75,16 +75,64 @@ float Picture::heightRatio()
 
 void Picture::initializeFaces(int minWidth, int maxWidth, int minHeight, int maxHeight)
 {
-    GLenum cubeMapTarget[6] = {GL_TEXTURE_CUBE_MAP_POSITIVE_X, GL_TEXTURE_CUBE_MAP_NEGATIVE_X,
-            GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GL_TEXTURE_CUBE_MAP_NEGATIVE_Y,
-            GL_TEXTURE_CUBE_MAP_POSITIVE_Z, GL_TEXTURE_CUBE_MAP_NEGATIVE_Z};
-
     glBindTexture(GL_TEXTURE_CUBE_MAP, cubeMapTextureID);
-    for (int face = 0; face < 6; face++)
+
+    // FACE_RIGHT and FACE_LEFT
+    QImage imageFaceRight(maxWidth - minWidth, maxHeight - minHeight, QImage::Format_RGB32);
+    QImage imageFaceLeft(maxWidth - minWidth, maxHeight - minHeight, QImage::Format_RGB32);
+    for (int x = minWidth; x < maxWidth; x++)
     {
-        glTexImage2D(cubeMapTarget[face], 0, GL_RGBA, textureImage.width(), textureImage.height(),
-                0, GL_RGBA, GL_UNSIGNED_BYTE, textureImage.bits());
+        for (int y = minHeight; y < maxHeight; y++)
+        {
+            imageFaceRight.setPixel(x - minWidth, y - minHeight,
+                    textureImage.pixel((maxWidth - 1), y));
+            imageFaceLeft.setPixel(x - minWidth, y - minHeight, textureImage.pixel(minWidth, y));
+        }
     }
+    imageFaceRight = QGLWidget::convertToGLFormat(imageFaceRight);
+    imageFaceLeft = QGLWidget::convertToGLFormat(imageFaceLeft);
+    glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X, 0, GL_RGBA, imageFaceRight.width(),
+            imageFaceRight.height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, imageFaceRight.bits());
+    glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_X, 0, GL_RGBA, imageFaceLeft.width(),
+            imageFaceLeft.height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, imageFaceLeft.bits());
+
+    // FACE_TOP and FACE_BOTTOM
+    QImage imageFaceTop(maxWidth - minWidth, maxHeight - minHeight, QImage::Format_RGB32);
+    QImage imageFaceBottom(maxWidth - minWidth, maxHeight - minHeight, QImage::Format_RGB32);
+    for (int x = minWidth; x < maxWidth; x++)
+    {
+        for (int y = minHeight; y < maxHeight; y++)
+        {
+            imageFaceTop.setPixel((maxHeight - 1) - x, y - minHeight,
+                    textureImage.pixel(x, minHeight));
+            imageFaceBottom.setPixel((maxHeight - 1) - x, y - minHeight,
+                    textureImage.pixel(x, (maxHeight - 1)));
+        }
+    }
+    imageFaceTop = QGLWidget::convertToGLFormat(imageFaceTop);
+    imageFaceBottom = QGLWidget::convertToGLFormat(imageFaceBottom);
+    glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Y, 0, GL_RGBA, imageFaceTop.width(),
+            imageFaceTop.height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, imageFaceTop.bits());
+    glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, 0, GL_RGBA, imageFaceBottom.width(),
+            imageFaceBottom.height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, imageFaceBottom.bits());
+
+    // FACE_FRONT and FACE_BACK
+    QImage imageFaceFront(maxWidth - minWidth, maxHeight - minHeight, QImage::Format_RGB32);
+    QImage imageFaceBack(maxWidth - minWidth, maxHeight - minHeight, QImage::Format_RGB32);
+    for (int x = minWidth; x < maxWidth; x++)
+    {
+        for (int y = minHeight; y < maxHeight; y++)
+        {
+            imageFaceFront.setPixel((maxHeight - 1) - x, y - minHeight, textureImage.pixel(x, y));
+            imageFaceBack.setPixel(x - minWidth, y - minHeight, textureImage.pixel(x, y));
+        }
+    }
+    imageFaceFront = QGLWidget::convertToGLFormat(imageFaceFront);
+    imageFaceBack = QGLWidget::convertToGLFormat(imageFaceBack);
+    glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Z, 0, GL_RGBA, imageFaceFront.width(),
+            imageFaceFront.height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, imageFaceFront.bits());
+    glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, 0, GL_RGBA, imageFaceBack.width(),
+            imageFaceBack.height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, imageFaceBack.bits());
 
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);

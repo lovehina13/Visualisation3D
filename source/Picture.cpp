@@ -103,10 +103,10 @@ void Picture::initializeFaces(int minWidth, int maxWidth, int minHeight, int max
     {
         for (int y = minHeight; y < maxHeight; y++)
         {
-            imageFaceTop.setPixel((maxHeight - 1) - x, y - minHeight,
-                    textureImage.pixel(x, minHeight));
-            imageFaceBottom.setPixel((maxHeight - 1) - x, y - minHeight,
-                    textureImage.pixel(x, (maxHeight - 1)));
+            imageFaceTop.setPixel(x - minWidth, y - minHeight,
+                    textureImage.pixel((minWidth + maxWidth - 1) - x, minHeight));
+            imageFaceBottom.setPixel(x - minWidth, y - minHeight,
+                    textureImage.pixel((minWidth + maxWidth - 1) - x, (maxHeight - 1)));
         }
     }
     imageFaceTop = QGLWidget::convertToGLFormat(imageFaceTop);
@@ -123,7 +123,8 @@ void Picture::initializeFaces(int minWidth, int maxWidth, int minHeight, int max
     {
         for (int y = minHeight; y < maxHeight; y++)
         {
-            imageFaceFront.setPixel((maxHeight - 1) - x, y - minHeight, textureImage.pixel(x, y));
+            imageFaceFront.setPixel(x - minWidth, y - minHeight,
+                    textureImage.pixel((minWidth + maxWidth - 1) - x, y));
             imageFaceBack.setPixel(x - minWidth, y - minHeight, textureImage.pixel(x, y));
         }
     }

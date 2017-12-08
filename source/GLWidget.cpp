@@ -55,9 +55,9 @@ void GLWidget::paintGL()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
     glTranslatef(0.0, 0.0, -10.0);
-    glRotatef(xRotation, 1.0, 0.0, 0.0);
-    glRotatef(yRotation, 0.0, 1.0, 0.0);
-    glRotatef(zRotation, 0.0, 0.0, 1.0);
+    glRotatef((float) xRotation, 1.0, 0.0, 0.0);
+    glRotatef((float) yRotation, 0.0, 1.0, 0.0);
+    glRotatef((float) zRotation, 0.0, 0.0, 1.0);
 
     skyBox->paint();
 

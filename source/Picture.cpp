@@ -146,6 +146,12 @@ void Picture::drawPicture()
 {
     float n = -1.0;
     float p = +1.0;
+    float nx = n;
+    float px = p;
+    float ny = n;
+    float py = p;
+    float nz = n;
+    float pz = p;
     float nw = -displayWidth * widthRatio();
     float pw = +displayWidth * widthRatio();
     float nh = -displayHeight * heightRatio();
@@ -157,44 +163,44 @@ void Picture::drawPicture()
     glColor3f(1.0, 1.0, 1.0);
 
     glBegin(GL_QUADS); // FACE_RIGHT
-    glTexCoord3f(p, p, p); glVertex3f(pw, nh, nd);
-    glTexCoord3f(p, n, p); glVertex3f(pw, ph, nd);
-    glTexCoord3f(p, n, n); glVertex3f(pw, ph, pd);
-    glTexCoord3f(p, p, n); glVertex3f(pw, nh, pd);
+    glTexCoord3f(px, py, pz); glVertex3f(pw, nh, nd);
+    glTexCoord3f(px, ny, pz); glVertex3f(pw, ph, nd);
+    glTexCoord3f(px, ny, nz); glVertex3f(pw, ph, pd);
+    glTexCoord3f(px, py, nz); glVertex3f(pw, nh, pd);
     glEnd();
 
     glBegin(GL_QUADS); // FACE_LEFT
-    glTexCoord3f(n, p, n); glVertex3f(nw, nh, pd);
-    glTexCoord3f(n, n, n); glVertex3f(nw, ph, pd);
-    glTexCoord3f(n, n, p); glVertex3f(nw, ph, nd);
-    glTexCoord3f(n, p, p); glVertex3f(nw, nh, nd);
+    glTexCoord3f(nx, py, nz); glVertex3f(nw, nh, pd);
+    glTexCoord3f(nx, ny, nz); glVertex3f(nw, ph, pd);
+    glTexCoord3f(nx, ny, pz); glVertex3f(nw, ph, nd);
+    glTexCoord3f(nx, py, pz); glVertex3f(nw, nh, nd);
     glEnd();
 
     glBegin(GL_QUADS); // FACE_TOP
-    glTexCoord3f(n, p, n); glVertex3f(pw, ph, pd);
-    glTexCoord3f(n, p, p); glVertex3f(pw, ph, nd);
-    glTexCoord3f(p, p, p); glVertex3f(nw, ph, nd);
-    glTexCoord3f(p, p, n); glVertex3f(nw, ph, pd);
+    glTexCoord3f(nx, py, nz); glVertex3f(pw, ph, pd);
+    glTexCoord3f(nx, py, pz); glVertex3f(pw, ph, nd);
+    glTexCoord3f(px, py, pz); glVertex3f(nw, ph, nd);
+    glTexCoord3f(px, py, nz); glVertex3f(nw, ph, pd);
     glEnd();
 
     glBegin(GL_QUADS); // FACE_BOTTOM
-    glTexCoord3f(n, n, p); glVertex3f(pw, nh, nd);
-    glTexCoord3f(n, n, n); glVertex3f(pw, nh, pd);
-    glTexCoord3f(p, n, n); glVertex3f(nw, nh, pd);
-    glTexCoord3f(p, n, p); glVertex3f(nw, nh, nd);
+    glTexCoord3f(nx, ny, pz); glVertex3f(pw, nh, nd);
+    glTexCoord3f(nx, ny, nz); glVertex3f(pw, nh, pd);
+    glTexCoord3f(px, ny, nz); glVertex3f(nw, nh, pd);
+    glTexCoord3f(px, ny, pz); glVertex3f(nw, nh, nd);
     glEnd();
 
     glBegin(GL_QUADS); // FACE_FRONT
-    glTexCoord3f(n, p, p); glVertex3f(pw, nh, pd);
-    glTexCoord3f(n, n, p); glVertex3f(pw, ph, pd);
-    glTexCoord3f(p, n, p); glVertex3f(nw, ph, pd);
-    glTexCoord3f(p, p, p); glVertex3f(nw, nh, pd);
+    glTexCoord3f(nx, py, pz); glVertex3f(pw, nh, pd);
+    glTexCoord3f(nx, ny, pz); glVertex3f(pw, ph, pd);
+    glTexCoord3f(px, ny, pz); glVertex3f(nw, ph, pd);
+    glTexCoord3f(px, py, pz); glVertex3f(nw, nh, pd);
     glEnd();
 
     glBegin(GL_QUADS); // FACE_BACK
-    glTexCoord3f(p, p, n); glVertex3f(nw, nh, nd);
-    glTexCoord3f(p, n, n); glVertex3f(nw, ph, nd);
-    glTexCoord3f(n, n, n); glVertex3f(pw, ph, nd);
-    glTexCoord3f(n, p, n); glVertex3f(pw, nh, nd);
+    glTexCoord3f(px, py, nz); glVertex3f(nw, nh, nd);
+    glTexCoord3f(px, ny, nz); glVertex3f(nw, ph, nd);
+    glTexCoord3f(nx, ny, nz); glVertex3f(pw, ph, nd);
+    glTexCoord3f(nx, py, nz); glVertex3f(pw, nh, nd);
     glEnd();
 }

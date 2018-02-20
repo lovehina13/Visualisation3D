@@ -66,6 +66,30 @@ MainWindow::MainWindow(QWidget* parent) :
     connect(this->ui->glWidget, SIGNAL(zRotationChanged(int)), this->ui->spinBoxRotationZ,
             SLOT(setValue(int)));
 
+    // Sliders to spin boxes (scales)
+    connect(this->ui->sliderZoom, SIGNAL(valueChanged(int)), this->ui->spinBoxZoom,
+            SLOT(setValue(int)));
+
+    // Sliders to widget (scales)
+    connect(this->ui->sliderZoom, SIGNAL(valueChanged(int)), this->ui->glWidget,
+            SLOT(setZoomScale(int)));
+
+    // Spin boxes to sliders (scales)
+    connect(this->ui->spinBoxZoom, SIGNAL(valueChanged(int)), this->ui->sliderZoom,
+            SLOT(setValue(int)));
+
+    // Spin boxes to widget (scales)
+    connect(this->ui->spinBoxZoom, SIGNAL(valueChanged(int)), this->ui->glWidget,
+            SLOT(setZoomScale(int)));
+
+    // Widget to sliders (scales)
+    connect(this->ui->glWidget, SIGNAL(zoomScaleChanged(int)), this->ui->sliderZoom,
+            SLOT(setValue(int)));
+
+    // Widget to spin boxes (scales)
+    connect(this->ui->glWidget, SIGNAL(zoomScaleChanged(int)), this->ui->spinBoxZoom,
+            SLOT(setValue(int)));
+
     // Sliders to spin boxes (sizes)
     connect(this->ui->sliderDisplayWidth, SIGNAL(valueChanged(int)), this->ui->spinBoxDisplayWidth,
             SLOT(setValue(int)));

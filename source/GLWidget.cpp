@@ -9,7 +9,8 @@
 #include <QString>
 
 GLWidget::GLWidget(QWidget* parent) :
-        QGLWidget(parent), xRotation(0), yRotation(0), zRotation(0), skyBox(new SkyBox())
+        QGLWidget(parent), xRotation(0), yRotation(0), zRotation(0), zoomScale(10),
+                skyBox(new SkyBox())
 {
 }
 
@@ -53,6 +54,13 @@ void GLWidget::initializeGL()
 void GLWidget::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    float zoom = (float) zoomScale / 10.0;
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glOrtho(-10.0 / zoom, +10.0 / zoom, -10.0 / zoom, +10.0 / zoom, -100.0, +100.0);
+    glMatrixMode(GL_MODELVIEW);
+
     glLoadIdentity();
     glTranslatef(0.0, 0.0, -10.0);
     glRotatef((float) xRotation, 1.0, 0.0, 0.0);
@@ -92,10 +100,11 @@ void GLWidget::paintGL()
 void GLWidget::resizeGL(int width, int height)
 {
     int side = qMin(width, height);
+    float zoom = (float) zoomScale / 10.0;
     glViewport((width - side) / 2, (height - side) / 2, side, side);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(-10.0, +10.0, -10.0, +10.0, -100.0, +100.0);
+    glOrtho(-10.0 / zoom, +10.0 / zoom, -10.0 / zoom, +10.0 / zoom, -100.0, +100.0);
     glMatrixMode(GL_MODELVIEW);
 }
 
@@ -123,12 +132,32 @@ void GLWidget::mouseMoveEvent(QMouseEvent* event)
     lastPosition = event->pos();
 }
 
+void GLWidget::wheelEvent(QWheelEvent* event)
+{
+    if (event->delta() > 0)
+    {
+        setZoomScale(zoomScale + 1);
+    }
+    else if (event->delta() < 0)
+    {
+        setZoomScale(zoomScale - 1);
+    }
+}
+
 static void qNormalizeAngle(int& angle)
 {
     while (angle < 0)
         angle += 360;
     while (angle > 360)
         angle -= 360;
+}
+
+static void qNormalizeScale(int& scale)
+{
+    if (scale < 10)
+        scale = 10;
+    if (scale > 100)
+        scale = 100;
 }
 
 void GLWidget::setXRotation(int angle)
@@ -160,6 +189,17 @@ void GLWidget::setZRotation(int angle)
     {
         zRotation = angle;
         emit zRotationChanged(angle);
+        updateGL();
+    }
+}
+
+void GLWidget::setZoomScale(int scale)
+{
+    qNormalizeScale(scale);
+    if (scale != zoomScale)
+    {
+        zoomScale = scale;
+        emit zoomScaleChanged(scale);
         updateGL();
     }
 }

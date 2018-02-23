@@ -23,7 +23,7 @@ public:
     void setDisplayDepth(float size);
 
     void initialize(QString fileName);
-    void paint();
+    void paint(int itPicture, int nbPictures);
     void finalize();
 
 protected:
@@ -31,7 +31,7 @@ protected:
     float heightRatio();
 
     void initializeFaces(int minWidth, int maxWidth, int minHeight, int maxHeight);
-    void drawPicture();
+    void drawPicture(int itPicture, int nbPictures);
 
 private:
     int pictureWidth;

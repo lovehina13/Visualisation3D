@@ -49,11 +49,11 @@ void Picture::initialize(QString fileName)
     }
 }
 
-void Picture::paint()
+void Picture::paint(int itPicture, int nbPictures)
 {
     glEnable(GL_TEXTURE_CUBE_MAP);
 
-    drawPicture();
+    drawPicture(itPicture, nbPictures);
 
     glDisable(GL_TEXTURE_CUBE_MAP);
 }
@@ -142,7 +142,7 @@ void Picture::initializeFaces(int minWidth, int maxWidth, int minHeight, int max
     // glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_REPEAT);
 }
 
-void Picture::drawPicture()
+void Picture::drawPicture(int itPicture, int nbPictures)
 {
     float n = -1.0;
     float p = +1.0;
@@ -158,6 +158,13 @@ void Picture::drawPicture()
     float ph = +displayHeight * heightRatio();
     float nd = -displayDepth;
     float pd = +displayDepth;
+
+    if (nbPictures > 1)
+    {
+        float subDepth = (displayDepth * 2.0) / (float) nbPictures;
+        nd = -displayDepth + subDepth * itPicture;
+        pd = -displayDepth + subDepth * (itPicture + 1);
+    }
 
     glBindTexture(GL_TEXTURE_CUBE_MAP, cubeMapTextureID);
     glColor3f(1.0, 1.0, 1.0);

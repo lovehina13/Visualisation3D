@@ -371,7 +371,7 @@
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionCharger">
    <property name="text">
-    <string>Charger une image...</string>
+    <string>Charger des images...</string>
    </property>
   </action>
   <action name="actionQuitter">

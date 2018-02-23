@@ -93,7 +93,7 @@ void GLWidget::paintGL()
     for (QList<Picture*>::const_iterator itPicture = pictures.begin(); itPicture != pictures.end();
             itPicture++)
     {
-        (*itPicture)->paint();
+        (*itPicture)->paint(pictures.indexOf(*itPicture), pictures.size());
     }
 }
 

@@ -9,6 +9,7 @@
 #include "ui_MainWindow.h"
 #include "Picture.h"
 #include <QFileDialog>
+#include <QList>
 #include <QString>
 
 MainWindow::MainWindow(QWidget* parent) :
@@ -130,17 +131,18 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionCharger_triggered()
 {
-    QString fileName = QFileDialog::getOpenFileName(this,
-            QString::fromUtf8("Sélection d'un fichier image"), 0,
+    QList<QString> fileNames = QFileDialog::getOpenFileNames(this,
+            QString::fromUtf8("Sélection des fichiers image"), 0,
             QString::fromUtf8("Fichier image (*.bmp *.jpg *.jpeg *.png)"));
-    if (fileName.isEmpty())
-        return;
-
-    Picture* picture = new Picture();
-    picture->initialize(fileName);
 
     this->ui->glWidget->removePictures();
-    this->ui->glWidget->addPicture(picture);
+    for (QList<QString>::const_iterator itFileName = fileNames.begin();
+            itFileName != fileNames.end(); itFileName++)
+    {
+        Picture* picture = new Picture();
+        picture->initialize(*itFileName);
+        this->ui->glWidget->addPicture(picture);
+    }
     this->ui->glWidget->setDisplayWidth(this->ui->spinBoxDisplayWidth->value());
     this->ui->glWidget->setDisplayHeight(this->ui->spinBoxDisplayHeight->value());
     this->ui->glWidget->setDisplayDepth(this->ui->spinBoxDisplayDepth->value());

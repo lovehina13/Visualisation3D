@@ -44,6 +44,7 @@ public slots:
     void setDisplayWidth(int size);
     void setDisplayHeight(int size);
     void setDisplayDepth(int size);
+    void setDisplaySpacing(int size);
 
 signals:
     void xRotationChanged(int angle);

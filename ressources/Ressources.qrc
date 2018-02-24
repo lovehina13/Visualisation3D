@@ -1,4 +1,8 @@
 <RCC>
+    <qresource prefix="/icons">
+        <file alias="icon-action-load">Image-x-generic.svg</file>
+        <file alias="icon-action-quit">System-log-out.svg</file>
+    </qresource>
     <qresource prefix="/skybox">
         <file alias="skybox-back">skybox-back-small.png</file>
         <file alias="skybox-bottom">skybox-bottom-small.png</file>

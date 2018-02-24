@@ -10,7 +10,7 @@
 
 Picture::Picture() :
         QGLFunctions(), pictureWidth(0), pictureHeight(0), displayWidth(0.0), displayHeight(0.0),
-                displayDepth(0.0), cubeMapTextureID(0)
+                displayDepth(0.0), displaySpacing(0.0), cubeMapTextureID(0)
 {
     // initialize(QString());
 }
@@ -33,6 +33,11 @@ void Picture::setDisplayHeight(float size)
 void Picture::setDisplayDepth(float size)
 {
     displayDepth = size;
+}
+
+void Picture::setDisplaySpacing(float size)
+{
+    displaySpacing = size;
 }
 
 void Picture::initialize(QString fileName)
@@ -162,8 +167,9 @@ void Picture::drawPicture(int itPicture, int nbPictures)
     if (nbPictures > 1)
     {
         float subDepth = (displayDepth * 2.0) / (float) nbPictures;
-        nd = -displayDepth + subDepth * itPicture;
-        pd = -displayDepth + subDepth * (itPicture + 1);
+        float subSpacing = displaySpacing * subDepth;
+        nd = -displayDepth + subDepth * itPicture + (subSpacing / 2.0);
+        pd = -displayDepth + subDepth * (itPicture + 1) - (subSpacing / 2.0);
     }
 
     glBindTexture(GL_TEXTURE_CUBE_MAP, cubeMapTextureID);

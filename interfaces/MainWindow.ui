@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>685</width>
-    <height>524</height>
+    <height>559</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -331,6 +331,42 @@
          </property>
         </widget>
        </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="labelDisplaySpacing">
+         <property name="text">
+          <string>Espacement</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QSlider" name="sliderDisplaySpacing">
+         <property name="minimumSize">
+          <size>
+           <width>100</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximum">
+          <number>100</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="tickPosition">
+          <enum>QSlider::TicksBothSides</enum>
+         </property>
+         <property name="tickInterval">
+          <number>20</number>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="2">
+        <widget class="QSpinBox" name="spinBoxDisplaySpacing">
+         <property name="maximum">
+          <number>100</number>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
     </item>
@@ -349,7 +385,7 @@
     </item>
    </layout>
   </widget>
-  <widget class="QMenuBar" name="menubar">
+  <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -358,23 +394,31 @@
      <height>21</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuFichier">
+   <widget class="QMenu" name="menuFile">
     <property name="title">
      <string>Fichier</string>
     </property>
-    <addaction name="actionCharger"/>
+    <addaction name="actionLoad"/>
     <addaction name="separator"/>
-    <addaction name="actionQuitter"/>
+    <addaction name="actionQuit"/>
    </widget>
-   <addaction name="menuFichier"/>
+   <addaction name="menuFile"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
-  <action name="actionCharger">
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionLoad">
+   <property name="icon">
+    <iconset resource="../ressources/Ressources.qrc">
+     <normaloff>:/icons/icon-action-load</normaloff>:/icons/icon-action-load</iconset>
+   </property>
    <property name="text">
     <string>Charger des images...</string>
    </property>
   </action>
-  <action name="actionQuitter">
+  <action name="actionQuit">
+   <property name="icon">
+    <iconset resource="../ressources/Ressources.qrc">
+     <normaloff>:/icons/icon-action-quit</normaloff>:/icons/icon-action-quit</iconset>
+   </property>
    <property name="text">
     <string>Quitter</string>
    </property>
@@ -388,6 +432,8 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../ressources/Ressources.qrc"/>
+ </resources>
  <connections/>
 </ui>

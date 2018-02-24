@@ -233,3 +233,13 @@ void GLWidget::setDisplayDepth(int size)
     }
     updateGL();
 }
+
+void GLWidget::setDisplaySpacing(int size)
+{
+    for (QList<Picture*>::const_iterator itPicture = pictures.begin(); itPicture != pictures.end();
+            itPicture++)
+    {
+        (*itPicture)->setDisplaySpacing((float) size / 100.0);
+    }
+    updateGL();
+}

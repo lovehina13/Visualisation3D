@@ -25,7 +25,7 @@ public:
     virtual ~MainWindow();
 
 public slots:
-    void on_actionCharger_triggered();
+    void on_actionLoad_triggered();
 
 private:
     Ui::MainWindow* ui;

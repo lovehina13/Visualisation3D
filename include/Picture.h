@@ -21,6 +21,7 @@ public:
     void setDisplayWidth(float size);
     void setDisplayHeight(float size);
     void setDisplayDepth(float size);
+    void setDisplaySpacing(float size);
 
     void initialize(QString fileName);
     void paint(int itPicture, int nbPictures);
@@ -39,6 +40,7 @@ private:
     float displayWidth;
     float displayHeight;
     float displayDepth;
+    float displaySpacing;
     QImage textureImage;
     GLuint cubeMapTextureID;
 

@@ -17,7 +17,7 @@ MainWindow::MainWindow(QWidget* parent) :
 {
     this->ui->setupUi(this);
 
-    connect(this->ui->actionQuitter, SIGNAL(triggered()), this, SLOT(close()));
+    connect(this->ui->actionQuit, SIGNAL(triggered()), this, SLOT(close()));
 
     // Sliders to spin boxes (rotations)
     connect(this->ui->sliderRotationX, SIGNAL(valueChanged(int)), this->ui->spinBoxRotationX,
@@ -98,6 +98,8 @@ MainWindow::MainWindow(QWidget* parent) :
             this->ui->spinBoxDisplayHeight, SLOT(setValue(int)));
     connect(this->ui->sliderDisplayDepth, SIGNAL(valueChanged(int)), this->ui->spinBoxDisplayDepth,
             SLOT(setValue(int)));
+    connect(this->ui->sliderDisplaySpacing, SIGNAL(valueChanged(int)),
+            this->ui->spinBoxDisplaySpacing, SLOT(setValue(int)));
 
     // Sliders to widget (sizes)
     connect(this->ui->sliderDisplayWidth, SIGNAL(valueChanged(int)), this->ui->glWidget,
@@ -106,6 +108,8 @@ MainWindow::MainWindow(QWidget* parent) :
             SLOT(setDisplayHeight(int)));
     connect(this->ui->sliderDisplayDepth, SIGNAL(valueChanged(int)), this->ui->glWidget,
             SLOT(setDisplayDepth(int)));
+    connect(this->ui->sliderDisplaySpacing, SIGNAL(valueChanged(int)), this->ui->glWidget,
+            SLOT(setDisplaySpacing(int)));
 
     // Spin boxes to sliders (sizes)
     connect(this->ui->spinBoxDisplayWidth, SIGNAL(valueChanged(int)), this->ui->sliderDisplayWidth,
@@ -114,6 +118,8 @@ MainWindow::MainWindow(QWidget* parent) :
             this->ui->sliderDisplayHeight, SLOT(setValue(int)));
     connect(this->ui->spinBoxDisplayDepth, SIGNAL(valueChanged(int)), this->ui->sliderDisplayDepth,
             SLOT(setValue(int)));
+    connect(this->ui->spinBoxDisplaySpacing, SIGNAL(valueChanged(int)),
+            this->ui->sliderDisplaySpacing, SLOT(setValue(int)));
 
     // Spin boxes to widget (sizes)
     connect(this->ui->spinBoxDisplayWidth, SIGNAL(valueChanged(int)), this->ui->glWidget,
@@ -122,6 +128,8 @@ MainWindow::MainWindow(QWidget* parent) :
             SLOT(setDisplayHeight(int)));
     connect(this->ui->spinBoxDisplayDepth, SIGNAL(valueChanged(int)), this->ui->glWidget,
             SLOT(setDisplayDepth(int)));
+    connect(this->ui->spinBoxDisplaySpacing, SIGNAL(valueChanged(int)), this->ui->glWidget,
+            SLOT(setDisplaySpacing(int)));
 }
 
 MainWindow::~MainWindow()
@@ -129,7 +137,7 @@ MainWindow::~MainWindow()
     delete this->ui;
 }
 
-void MainWindow::on_actionCharger_triggered()
+void MainWindow::on_actionLoad_triggered()
 {
     QList<QString> fileNames = QFileDialog::getOpenFileNames(this,
             QString::fromUtf8("Sélection des fichiers image"), 0,
@@ -146,5 +154,6 @@ void MainWindow::on_actionCharger_triggered()
     this->ui->glWidget->setDisplayWidth(this->ui->spinBoxDisplayWidth->value());
     this->ui->glWidget->setDisplayHeight(this->ui->spinBoxDisplayHeight->value());
     this->ui->glWidget->setDisplayDepth(this->ui->spinBoxDisplayDepth->value());
+    this->ui->glWidget->setDisplaySpacing(this->ui->spinBoxDisplaySpacing->value());
     this->ui->glWidget->updateGL();
 }

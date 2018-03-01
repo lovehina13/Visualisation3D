@@ -7,6 +7,7 @@
 
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
+#include "DocumentationWindow.h"
 #include "Picture.h"
 #include <QFileDialog>
 #include <QList>
@@ -164,7 +165,8 @@ void MainWindow::on_actionQuit_triggered()
 
 void MainWindow::on_actionDocumentation_triggered()
 {
-    // TODO void MainWindow::on_actionDocumentation_triggered()
+    DocumentationWindow* documentationWindow = new DocumentationWindow(this);
+    documentationWindow->exec();
 }
 
 void MainWindow::on_actionAbout_triggered()

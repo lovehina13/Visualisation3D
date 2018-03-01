@@ -1,7 +1,7 @@
 //==============================================================================
 // Name        : MainWindow.h
 // Author      : Alexis Foerster (alexis.foerster@gmail.com)
-// Version     : 1.0.0 (DD/MM/YYYY)
+// Version     : 1.0.0 (01/03/2018)
 // Description : Header file of the MainWindow class
 //==============================================================================
 

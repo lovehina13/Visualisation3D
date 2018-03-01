@@ -7,10 +7,13 @@
 
 #include "Picture.h"
 #include <QGLWidget>
+#include <QGraphicsPixmapItem>
+#include <QPixmap>
 
 Picture::Picture() :
-        QGLFunctions(), pictureWidth(0), pictureHeight(0), displayWidth(0.0), displayHeight(0.0),
-                displayDepth(0.0), displaySpacing(0.0), cubeMapTextureID(0)
+        QGLFunctions(), pictureWidth(0), pictureHeight(0), cropPictureWidth(0),
+                cropPictureHeight(0), displayWidth(0.0), displayHeight(0.0), displayDepth(0.0),
+                displaySpacing(0.0), cubeMapTextureID(0)
 {
     // initialize(QString());
 }
@@ -48,9 +51,20 @@ void Picture::initialize(QString fileName)
 
     if (textureImage.bits())
     {
+        QPixmap pixmap = QPixmap::fromImage(textureImage);
+        QGraphicsPixmapItem* item = new QGraphicsPixmapItem(pixmap);
+        int width = item->opaqueArea().boundingRect().width();
+        int height = item->opaqueArea().boundingRect().height();
+        int minWidth = item->opaqueArea().boundingRect().left();
+        int maxWidth = item->opaqueArea().boundingRect().right();
+        int minHeight = item->opaqueArea().boundingRect().top();
+        int maxHeight = item->opaqueArea().boundingRect().bottom();
+
         pictureWidth = textureImage.width();
         pictureHeight = textureImage.height();
-        initializeFaces(0, pictureWidth, 0, pictureHeight);
+        cropPictureWidth = width;
+        cropPictureHeight = height;
+        initializeFaces(minWidth, maxWidth, minHeight, maxHeight);
     }
 }
 
@@ -78,13 +92,23 @@ float Picture::heightRatio()
     return (float) pictureHeight / (float) qMax(pictureWidth, pictureHeight);
 }
 
+float Picture::cropWidthRatio()
+{
+    return (float) cropPictureWidth / (float) pictureWidth;
+}
+
+float Picture::cropHeightRatio()
+{
+    return (float) cropPictureHeight / (float) pictureHeight;
+}
+
 void Picture::initializeFaces(int minWidth, int maxWidth, int minHeight, int maxHeight)
 {
     glBindTexture(GL_TEXTURE_CUBE_MAP, cubeMapTextureID);
 
     // FACE_RIGHT and FACE_LEFT
-    QImage imageFaceRight(maxWidth - minWidth, maxHeight - minHeight, QImage::Format_RGB32);
-    QImage imageFaceLeft(maxWidth - minWidth, maxHeight - minHeight, QImage::Format_RGB32);
+    QImage imageFaceRight(maxWidth - minWidth, maxHeight - minHeight, QImage::Format_ARGB32);
+    QImage imageFaceLeft(maxWidth - minWidth, maxHeight - minHeight, QImage::Format_ARGB32);
     for (int x = minWidth; x < maxWidth; x++)
     {
         for (int y = minHeight; y < maxHeight; y++)
@@ -102,8 +126,8 @@ void Picture::initializeFaces(int minWidth, int maxWidth, int minHeight, int max
             imageFaceLeft.height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, imageFaceLeft.bits());
 
     // FACE_TOP and FACE_BOTTOM
-    QImage imageFaceTop(maxWidth - minWidth, maxHeight - minHeight, QImage::Format_RGB32);
-    QImage imageFaceBottom(maxWidth - minWidth, maxHeight - minHeight, QImage::Format_RGB32);
+    QImage imageFaceTop(maxWidth - minWidth, maxHeight - minHeight, QImage::Format_ARGB32);
+    QImage imageFaceBottom(maxWidth - minWidth, maxHeight - minHeight, QImage::Format_ARGB32);
     for (int x = minWidth; x < maxWidth; x++)
     {
         for (int y = minHeight; y < maxHeight; y++)
@@ -122,8 +146,8 @@ void Picture::initializeFaces(int minWidth, int maxWidth, int minHeight, int max
             imageFaceBottom.height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, imageFaceBottom.bits());
 
     // FACE_FRONT and FACE_BACK
-    QImage imageFaceFront(maxWidth - minWidth, maxHeight - minHeight, QImage::Format_RGB32);
-    QImage imageFaceBack(maxWidth - minWidth, maxHeight - minHeight, QImage::Format_RGB32);
+    QImage imageFaceFront(maxWidth - minWidth, maxHeight - minHeight, QImage::Format_ARGB32);
+    QImage imageFaceBack(maxWidth - minWidth, maxHeight - minHeight, QImage::Format_ARGB32);
     for (int x = minWidth; x < maxWidth; x++)
     {
         for (int y = minHeight; y < maxHeight; y++)
@@ -157,10 +181,10 @@ void Picture::drawPicture(int itPicture, int nbPictures)
     float py = p;
     float nz = n;
     float pz = p;
-    float nw = -displayWidth * widthRatio();
-    float pw = +displayWidth * widthRatio();
-    float nh = -displayHeight * heightRatio();
-    float ph = +displayHeight * heightRatio();
+    float nw = -displayWidth * widthRatio() * cropWidthRatio();
+    float pw = +displayWidth * widthRatio() * cropWidthRatio();
+    float nh = -displayHeight * heightRatio() * cropHeightRatio();
+    float ph = +displayHeight * heightRatio() * cropHeightRatio();
     float nd = -displayDepth;
     float pd = +displayDepth;
 
@@ -174,6 +198,9 @@ void Picture::drawPicture(int itPicture, int nbPictures)
 
     glBindTexture(GL_TEXTURE_CUBE_MAP, cubeMapTextureID);
     glColor3f(1.0, 1.0, 1.0);
+
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     glBegin(GL_QUADS); // FACE_RIGHT
     glTexCoord3f(px, py, pz); glVertex3f(pw, nh, nd);
@@ -216,4 +243,6 @@ void Picture::drawPicture(int itPicture, int nbPictures)
     glTexCoord3f(nx, ny, nz); glVertex3f(pw, ph, nd);
     glTexCoord3f(nx, py, nz); glVertex3f(pw, nh, nd);
     glEnd();
+
+    glDisable(GL_BLEND);
 }

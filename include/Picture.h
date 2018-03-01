@@ -30,6 +30,8 @@ public:
 protected:
     float widthRatio();
     float heightRatio();
+    float cropWidthRatio();
+    float cropHeightRatio();
 
     void initializeFaces(int minWidth, int maxWidth, int minHeight, int maxHeight);
     void drawPicture(int itPicture, int nbPictures);
@@ -37,6 +39,8 @@ protected:
 private:
     int pictureWidth;
     int pictureHeight;
+    int cropPictureWidth;
+    int cropPictureHeight;
     float displayWidth;
     float displayHeight;
     float displayDepth;

@@ -7,11 +7,15 @@
     <x>0</x>
     <y>0</y>
     <width>685</width>
-    <height>559</height>
+    <height>459</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Visualisation3D</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../ressources/Ressources.qrc">
+    <normaloff>:/icons/icon-visualisation-3d</normaloff>:/icons/icon-visualisation-3d</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayoutMainWindow">
@@ -402,7 +406,15 @@
     <addaction name="separator"/>
     <addaction name="actionQuit"/>
    </widget>
+   <widget class="QMenu" name="menuInformation">
+    <property name="title">
+     <string>Informations</string>
+    </property>
+    <addaction name="actionDocumentation"/>
+    <addaction name="actionAbout"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuInformation"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionLoad">
@@ -413,6 +425,9 @@
    <property name="text">
     <string>Charger des images...</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
   </action>
   <action name="actionQuit">
    <property name="icon">
@@ -421,6 +436,33 @@
    </property>
    <property name="text">
     <string>Quitter</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="actionDocumentation">
+   <property name="icon">
+    <iconset resource="../ressources/Ressources.qrc">
+     <normaloff>:/icons/icon-action-documentation</normaloff>:/icons/icon-action-documentation</iconset>
+   </property>
+   <property name="text">
+    <string>Documentation...</string>
+   </property>
+   <property name="shortcut">
+    <string>F1</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="icon">
+    <iconset resource="../ressources/Ressources.qrc">
+     <normaloff>:/icons/icon-action-about</normaloff>:/icons/icon-action-about</iconset>
+   </property>
+   <property name="text">
+    <string>À propos de Visualisation3D...</string>
+   </property>
+   <property name="shortcut">
+    <string>F2</string>
    </property>
   </action>
  </widget>

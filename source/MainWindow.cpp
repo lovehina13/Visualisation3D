@@ -10,14 +10,13 @@
 #include "Picture.h"
 #include <QFileDialog>
 #include <QList>
+#include <QMessageBox>
 #include <QString>
 
 MainWindow::MainWindow(QWidget* parent) :
         QMainWindow(parent), ui(new Ui::MainWindow)
 {
     this->ui->setupUi(this);
-
-    connect(this->ui->actionQuit, SIGNAL(triggered()), this, SLOT(close()));
 
     // Sliders to spin boxes (rotations)
     connect(this->ui->sliderRotationX, SIGNAL(valueChanged(int)), this->ui->spinBoxRotationX,
@@ -156,4 +155,24 @@ void MainWindow::on_actionLoad_triggered()
     this->ui->glWidget->setDisplayDepth(this->ui->spinBoxDisplayDepth->value());
     this->ui->glWidget->setDisplaySpacing(this->ui->spinBoxDisplaySpacing->value());
     this->ui->glWidget->updateGL();
+}
+
+void MainWindow::on_actionQuit_triggered()
+{
+    this->close();
+}
+
+void MainWindow::on_actionDocumentation_triggered()
+{
+    // TODO void MainWindow::on_actionDocumentation_triggered()
+}
+
+void MainWindow::on_actionAbout_triggered()
+{
+    QMessageBox* messageBox = new QMessageBox(QMessageBox::Information,
+            QString::fromUtf8("Visualisation3D"),
+            QString::fromUtf8("Visualisation3D - Version 1.0.0 (DD/MM/YYYY).\n"
+                    "Réalisée par Alexis Foerster (alexis.foerster@gmail.com)."), QMessageBox::Ok,
+            this);
+    messageBox->exec();
 }

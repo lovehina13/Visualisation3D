@@ -13,3 +13,5 @@ Les fonctionnalités ultérieures de l'application seront les suivantes :
  - Fonctionnalités de dispositions et de coupes.
 
 L'application est réalisée en C++11 et Qt 4.8.7.
+
+![](./documentation/Visualisation3D.png "Visualisation3D")

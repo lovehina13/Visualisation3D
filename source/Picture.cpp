@@ -65,6 +65,8 @@ void Picture::initialize(QString fileName)
         cropPictureWidth = width;
         cropPictureHeight = height;
         initializeFaces(minWidth, maxWidth, minHeight, maxHeight);
+
+        delete item;
     }
 }
 

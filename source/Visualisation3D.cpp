@@ -1,7 +1,7 @@
 //==============================================================================
 // Name        : Visualisation3D.cpp
 // Author      : Alexis Foerster (alexis.foerster@gmail.com)
-// Version     : 1.0.0 (01/03/2018)
+// Version     : 1.0.1 (11/04/2018)
 // Description : Main file of the Visualisation3D project
 //==============================================================================
 

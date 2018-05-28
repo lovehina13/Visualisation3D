@@ -1,10 +1,10 @@
 <RCC>
     <qresource prefix="/icons">
-        <file alias="icon-visualisation-3d">Emblem-earth.svg</file>
-        <file alias="icon-action-load">Image-x-generic.svg</file>
-        <file alias="icon-action-quit">System-log-out.svg</file>
-        <file alias="icon-action-documentation">X-office-address-book.svg</file>
-        <file alias="icon-action-about">Help-browser.svg</file>
+        <file alias="icon-visualisation-3d">emblem-earth.svg</file>
+        <file alias="icon-action-load">image-x-generic.svg</file>
+        <file alias="icon-action-quit">system-log-out.svg</file>
+        <file alias="icon-action-documentation">x-office-address-book.svg</file>
+        <file alias="icon-action-about">help-browser.svg</file>
     </qresource>
     <qresource prefix="/skybox">
         <file alias="skybox-back">skybox-back-small.png</file>

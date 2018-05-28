@@ -1,7 +1,7 @@
 //==============================================================================
 // Name        : GLWidget.cpp
 // Author      : Alexis Foerster (alexis.foerster@gmail.com)
-// Version     : 1.0.1 (11/04/2018)
+// Version     : 1.0.2 (28/05/2018)
 // Description : Source file of the GLWidget class
 //==============================================================================
 

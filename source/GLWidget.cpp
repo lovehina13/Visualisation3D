@@ -9,8 +9,8 @@
 #include <QString>
 
 GLWidget::GLWidget(QWidget* parent) :
-        QGLWidget(parent), xRotation(0), yRotation(0), zRotation(0), zoomScale(10),
-                skyBox(new SkyBox())
+        QGLWidget(parent), picturesDepth(DEPTH_Z), picturesRotation(ROTATION_0), xRotation(0),
+                yRotation(0), zRotation(0), zoomScale(10), skyBox(new SkyBox())
 {
 }
 
@@ -90,6 +90,28 @@ void GLWidget::paintGL()
     glVertex3f(0.0, 0.0, 10.0);
     glEnd();
 
+    if (picturesDepth == DEPTH_X)
+    {
+        glRotatef(90.0, 0.0, 1.0, 0.0);
+    }
+    else if (picturesDepth == DEPTH_Y)
+    {
+        glRotatef(270.0, 1.0, 0.0, 0.0);
+    }
+
+    if (picturesRotation == ROTATION_90)
+    {
+        glRotatef(270.0, 0.0, 0.0, 1.0);
+    }
+    else if (picturesRotation == ROTATION_180)
+    {
+        glRotatef(180.0, 0.0, 0.0, 1.0);
+    }
+    else if (picturesRotation == ROTATION_270)
+    {
+        glRotatef(90.0, 0.0, 0.0, 1.0);
+    }
+
     for (QList<Picture*>::const_iterator itPicture = pictures.begin(); itPicture != pictures.end();
             itPicture++)
     {
@@ -158,6 +180,26 @@ static void qNormalizeScale(int& scale)
         scale = 10;
     if (scale > 100)
         scale = 100;
+}
+
+void GLWidget::setPicturesDepth(int depth)
+{
+    if (depth != picturesDepth)
+    {
+        picturesDepth = depth;
+        emit picturesDepthChanged(depth);
+        updateGL();
+    }
+}
+
+void GLWidget::setPicturesRotation(int rotation)
+{
+    if (rotation != picturesRotation)
+    {
+        picturesRotation = rotation;
+        emit picturesRotationChanged(rotation);
+        updateGL();
+    }
 }
 
 void GLWidget::setXRotation(int angle)

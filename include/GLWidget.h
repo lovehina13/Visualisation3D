@@ -37,6 +37,8 @@ protected:
     void wheelEvent(QWheelEvent* event);
 
 public slots:
+    void setPicturesDepth(int depth);
+    void setPicturesRotation(int rotation);
     void setXRotation(int angle);
     void setYRotation(int angle);
     void setZRotation(int angle);
@@ -47,12 +49,16 @@ public slots:
     void setDisplaySpacing(int size);
 
 signals:
+    void picturesDepthChanged(int depth);
+    void picturesRotationChanged(int rotation);
     void xRotationChanged(int angle);
     void yRotationChanged(int angle);
     void zRotationChanged(int angle);
     void zoomScaleChanged(int scale);
 
 private:
+    int picturesDepth;
+    int picturesRotation;
     int xRotation;
     int yRotation;
     int zRotation;
@@ -60,6 +66,16 @@ private:
     QPoint lastPosition;
     SkyBox* skyBox;
     QList<Picture*> pictures;
+
+    enum picturesDepths
+    {
+        DEPTH_X, DEPTH_Y, DEPTH_Z
+    };
+
+    enum picturesRotations
+    {
+        ROTATION_0, ROTATION_90, ROTATION_180, ROTATION_270
+    };
 };
 
 #endif /* GLWIDGET_H */

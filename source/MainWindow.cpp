@@ -19,6 +19,18 @@ MainWindow::MainWindow(QWidget* parent) :
 {
     this->ui->setupUi(this);
 
+    // Combo boxes to widget (positioning)
+    connect(this->ui->comboBoxPicturesDepth, SIGNAL(currentIndexChanged(int)), this->ui->glWidget,
+            SLOT(setPicturesDepth(int)));
+    connect(this->ui->comboBoxPicturesRotation, SIGNAL(currentIndexChanged(int)),
+            this->ui->glWidget, SLOT(setPicturesRotation(int)));
+
+    // Widget to combo boxes (positioning)
+    connect(this->ui->glWidget, SIGNAL(picturesDepthChanged(int)), this->ui->comboBoxPicturesDepth,
+            SLOT(setCurrentIndex(int)));
+    connect(this->ui->glWidget, SIGNAL(picturesRotationChanged(int)),
+            this->ui->comboBoxPicturesRotation, SLOT(setCurrentIndex(int)));
+
     // Sliders to spin boxes (rotations)
     connect(this->ui->sliderRotationX, SIGNAL(valueChanged(int)), this->ui->spinBoxRotationX,
             SLOT(setValue(int)));

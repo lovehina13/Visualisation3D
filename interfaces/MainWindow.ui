@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>685</width>
-    <height>459</height>
+    <height>523</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,7 +19,7 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayoutMainWindow">
-    <item row="0" column="0" rowspan="4">
+    <item row="0" column="0" rowspan="5">
      <widget class="GLWidget" name="glWidget" native="true">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -36,6 +36,75 @@
      </widget>
     </item>
     <item row="0" column="1">
+     <widget class="QGroupBox" name="groupBoxPositioning">
+      <property name="title">
+       <string>Positionnements</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayoutPositioning">
+       <item row="0" column="0">
+        <widget class="QLabel" name="labelPicturesDepth">
+         <property name="text">
+          <string>Profondeur</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QComboBox" name="comboBoxPicturesDepth">
+         <property name="currentIndex">
+          <number>2</number>
+         </property>
+         <item>
+          <property name="text">
+           <string>X</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Y</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Z</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="labelPicturesRotation">
+         <property name="text">
+          <string>Rotation</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QComboBox" name="comboBoxPicturesRotation">
+         <item>
+          <property name="text">
+           <string>0°</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>90°</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>180°</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>270°</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="1" column="1">
      <widget class="QGroupBox" name="groupBoxRotations">
       <property name="title">
        <string>Rotations</string>
@@ -152,7 +221,7 @@
       </layout>
      </widget>
     </item>
-    <item row="1" column="1">
+    <item row="2" column="1">
      <widget class="QGroupBox" name="groupBoxScales">
       <property name="title">
        <string>Échelles</string>
@@ -203,7 +272,7 @@
       </layout>
      </widget>
     </item>
-    <item row="2" column="1">
+    <item row="3" column="1">
      <widget class="QGroupBox" name="groupBoxSizes">
       <property name="title">
        <string>Tailles</string>
@@ -374,7 +443,7 @@
       </layout>
      </widget>
     </item>
-    <item row="3" column="1">
+    <item row="4" column="1">
      <spacer name="verticalSpacer">
       <property name="orientation">
        <enum>Qt::Vertical</enum>

@@ -1,7 +1,7 @@
 //==============================================================================
 // Name        : SkyBox.cpp
 // Author      : Alexis Foerster (alexis.foerster@gmail.com)
-// Version     : 1.0.2 (28/05/2018)
+// Version     : 1.1.0 (22/07/2018)
 // Description : Source file of the SkyBox class
 //==============================================================================
 

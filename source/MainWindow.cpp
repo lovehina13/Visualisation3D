@@ -1,7 +1,7 @@
 //==============================================================================
 // Name        : MainWindow.cpp
 // Author      : Alexis Foerster (alexis.foerster@gmail.com)
-// Version     : 1.0.2 (28/05/2018)
+// Version     : 1.1.0 (22/07/2018)
 // Description : Source file of the MainWindow class
 //==============================================================================
 
@@ -185,7 +185,7 @@ void MainWindow::on_actionAbout_triggered()
 {
     QMessageBox* messageBox = new QMessageBox(QMessageBox::Information,
             QString::fromUtf8("Visualisation3D"),
-            QString::fromUtf8("Visualisation3D - Version 1.0.2 (28/05/2018).\n"
+            QString::fromUtf8("Visualisation3D - Version 1.1.0 (22/07/2018).\n"
                     "Réalisée par Alexis Foerster (alexis.foerster@gmail.com)."), QMessageBox::Ok,
             this);
     messageBox->exec();

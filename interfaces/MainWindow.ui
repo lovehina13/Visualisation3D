@@ -17,7 +17,7 @@
    <iconset resource="../ressources/Ressources.qrc">
     <normaloff>:/icons/icon-visualisation-3d</normaloff>:/icons/icon-visualisation-3d</iconset>
   </property>
-  <widget class="QWidget" name="centralwidget">
+  <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayoutMainWindow">
     <item row="0" column="0" rowspan="5">
      <widget class="GLWidget" name="glWidget" native="true">

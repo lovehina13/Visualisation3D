@@ -1,7 +1,7 @@
 #===============================================================================
 # Name        : Visualisation3D.pro
 # Author      : Alexis Foerster (alexis.foerster@gmail.com)
-# Version     : 1.1.0 (22/07/2018)
+# Version     : 1.1.1 (05/04/2019)
 # Description : Qt project file of the Visualisation3D project
 #===============================================================================
 

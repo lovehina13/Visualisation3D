@@ -9,8 +9,8 @@
 #include <QString>
 
 GLWidget::GLWidget(QWidget* parent) :
-        QGLWidget(parent), picturesDepth(DEPTH_Z), picturesRotation(ROTATION_0), xRotation(0),
-                yRotation(0), zRotation(0), zoomScale(10), skyBox(new SkyBox())
+        QGLWidget(parent), picturesDepth(DEPTH_Z), picturesRotation(0), xRotation(0), yRotation(0),
+                zRotation(0), zoomScale(10), skyBox(new SkyBox())
 {
 }
 
@@ -98,18 +98,22 @@ void GLWidget::paintGL()
     {
         glRotatef(270.0, 1.0, 0.0, 0.0);
     }
+    else if (picturesDepth == DEPTH_X_INV)
+    {
+        glRotatef(270.0, 0.0, 1.0, 0.0);
+    }
+    else if (picturesDepth == DEPTH_Y_INV)
+    {
+        glRotatef(90.0, 1.0, 0.0, 0.0);
+    }
+    else if (picturesDepth == DEPTH_Z_INV)
+    {
+        glRotatef(180.0, 0.0, 1.0, 0.0);
+    }
 
-    if (picturesRotation == ROTATION_90)
+    if (picturesRotation > 0)
     {
-        glRotatef(270.0, 0.0, 0.0, 1.0);
-    }
-    else if (picturesRotation == ROTATION_180)
-    {
-        glRotatef(180.0, 0.0, 0.0, 1.0);
-    }
-    else if (picturesRotation == ROTATION_270)
-    {
-        glRotatef(90.0, 0.0, 0.0, 1.0);
+        glRotatef(360.0 - (float) picturesRotation, 0.0, 0.0, 1.0);
     }
 
     for (QList<Picture*>::const_iterator itPicture = pictures.begin(); itPicture != pictures.end();

@@ -69,12 +69,7 @@ private:
 
     enum picturesDepths
     {
-        DEPTH_X, DEPTH_Y, DEPTH_Z
-    };
-
-    enum picturesRotations
-    {
-        ROTATION_0, ROTATION_90, ROTATION_180, ROTATION_270
+        DEPTH_X, DEPTH_Y, DEPTH_Z, DEPTH_X_INV, DEPTH_Y_INV, DEPTH_Z_INV
     };
 };
 

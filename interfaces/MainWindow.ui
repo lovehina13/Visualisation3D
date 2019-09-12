@@ -55,17 +55,32 @@
          </property>
          <item>
           <property name="text">
-           <string>X</string>
+           <string>+X</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>Y</string>
+           <string>+Y</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>Z</string>
+           <string>+Z</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>-X</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>-Y</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>-Z</string>
           </property>
          </item>
         </widget>
@@ -78,27 +93,10 @@
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QComboBox" name="comboBoxPicturesRotation">
-         <item>
-          <property name="text">
-           <string>0°</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>90°</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>180°</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>270°</string>
-          </property>
-         </item>
+        <widget class="QSpinBox" name="spinBoxPicturesRotation">
+         <property name="maximum">
+          <number>360</number>
+         </property>
         </widget>
        </item>
       </layout>

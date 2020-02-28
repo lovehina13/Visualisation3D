@@ -14,4 +14,4 @@ Les fonctionnalités ultérieures de l'application seront les suivantes :
 
 L'application est réalisée en C++11 et [Qt 4.8.7](https://download.qt.io/archive/qt/4.8/4.8.7/).
 
-![](./documentation/Visualisation3D.png "Visualisation3D")
+![](doc/Visualisation3D.png "Visualisation3D")

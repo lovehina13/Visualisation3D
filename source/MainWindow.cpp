@@ -152,7 +152,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_actionLoad_triggered()
 {
     QList<QString> fileNames = QFileDialog::getOpenFileNames(this,
-            QString::fromUtf8("Sélection des fichiers image"), 0,
+            QString::fromUtf8("Sélection des fichiers image"), nullptr,
             QString::fromUtf8("Fichier image (*.bmp *.jpg *.jpeg *.png)"));
 
     this->ui->glWidget->removePictures();

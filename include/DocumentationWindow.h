@@ -21,7 +21,7 @@ class DocumentationWindow : public QDialog
     Q_OBJECT
 
 public:
-    explicit DocumentationWindow(QWidget* parent = NULL);
+    explicit DocumentationWindow(QWidget* parent = nullptr);
     virtual ~DocumentationWindow();
 
 private:

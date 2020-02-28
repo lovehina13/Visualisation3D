@@ -22,7 +22,7 @@ class GLWidget : public QGLWidget
     Q_OBJECT
 
 public:
-    explicit GLWidget(QWidget* parent = 0);
+    explicit GLWidget(QWidget* parent = nullptr);
     virtual ~GLWidget();
 
     void addPicture(Picture* picture);

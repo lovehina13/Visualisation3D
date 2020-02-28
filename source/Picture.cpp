@@ -1,7 +1,7 @@
 //==============================================================================
 // Name        : Picture.cpp
 // Author      : Alexis Foerster (alexis.foerster@gmail.com)
-// Version     : 1.1.1 (05/04/2019)
+// Version     : 1.1.2 (28/02/2020)
 // Description : Source file of the Picture class
 //==============================================================================
 

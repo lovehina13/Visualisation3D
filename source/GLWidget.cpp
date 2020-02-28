@@ -62,58 +62,58 @@ void GLWidget::paintGL()
     glMatrixMode(GL_MODELVIEW);
 
     glLoadIdentity();
-    glTranslatef(0.0, 0.0, -10.0);
-    glRotatef(static_cast<double>(xRotation), 1.0, 0.0, 0.0);
-    glRotatef(static_cast<double>(yRotation), 0.0, 1.0, 0.0);
-    glRotatef(static_cast<double>(zRotation), 0.0, 0.0, 1.0);
+    glTranslated(0.0, 0.0, -10.0);
+    glRotated(static_cast<double>(xRotation), 1.0, 0.0, 0.0);
+    glRotated(static_cast<double>(yRotation), 0.0, 1.0, 0.0);
+    glRotated(static_cast<double>(zRotation), 0.0, 0.0, 1.0);
 
     skyBox->paint();
 
     glLineWidth(2.0);
-    glColor3f(1.0, 0.0, 0.0);
+    glColor3d(1.0, 0.0, 0.0);
     glBegin(GL_LINES);
-    glVertex3f(0.0, 0.0, 0.0);
-    glVertex3f(10.0, 0.0, 0.0);
+    glVertex3d(0.0, 0.0, 0.0);
+    glVertex3d(10.0, 0.0, 0.0);
     glEnd();
 
     glLineWidth(2.0);
-    glColor3f(0.0, 1.0, 0.0);
+    glColor3d(0.0, 1.0, 0.0);
     glBegin(GL_LINES);
-    glVertex3f(0.0, 0.0, 0.0);
-    glVertex3f(0.0, 10.0, 0.0);
+    glVertex3d(0.0, 0.0, 0.0);
+    glVertex3d(0.0, 10.0, 0.0);
     glEnd();
 
     glLineWidth(2.0);
-    glColor3f(0.0, 0.0, 1.0);
+    glColor3d(0.0, 0.0, 1.0);
     glBegin(GL_LINES);
-    glVertex3f(0.0, 0.0, 0.0);
-    glVertex3f(0.0, 0.0, 10.0);
+    glVertex3d(0.0, 0.0, 0.0);
+    glVertex3d(0.0, 0.0, 10.0);
     glEnd();
 
     if (picturesDepth == DEPTH_X)
     {
-        glRotatef(90.0, 0.0, 1.0, 0.0);
+        glRotated(90.0, 0.0, 1.0, 0.0);
     }
     else if (picturesDepth == DEPTH_Y)
     {
-        glRotatef(270.0, 1.0, 0.0, 0.0);
+        glRotated(270.0, 1.0, 0.0, 0.0);
     }
     else if (picturesDepth == DEPTH_X_INV)
     {
-        glRotatef(270.0, 0.0, 1.0, 0.0);
+        glRotated(270.0, 0.0, 1.0, 0.0);
     }
     else if (picturesDepth == DEPTH_Y_INV)
     {
-        glRotatef(90.0, 1.0, 0.0, 0.0);
+        glRotated(90.0, 1.0, 0.0, 0.0);
     }
     else if (picturesDepth == DEPTH_Z_INV)
     {
-        glRotatef(180.0, 0.0, 1.0, 0.0);
+        glRotated(180.0, 0.0, 1.0, 0.0);
     }
 
     if (picturesRotation > 0)
     {
-        glRotatef(360.0 - static_cast<double>(picturesRotation), 0.0, 0.0, 1.0);
+        glRotated(360.0 - static_cast<double>(picturesRotation), 0.0, 0.0, 1.0);
     }
 
     for (QList<Picture*>::const_iterator itPicture = pictures.begin(); itPicture != pictures.end();

@@ -201,51 +201,51 @@ void Picture::drawPicture(int itPicture, int nbPictures)
     }
 
     glBindTexture(GL_TEXTURE_CUBE_MAP, cubeMapTextureID);
-    glColor3f(1.0, 1.0, 1.0);
+    glColor3d(1.0, 1.0, 1.0);
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     glBegin(GL_QUADS); // FACE_RIGHT
-    glTexCoord3f(px, py, pz); glVertex3f(pw, nh, nd);
-    glTexCoord3f(px, ny, pz); glVertex3f(pw, ph, nd);
-    glTexCoord3f(px, ny, nz); glVertex3f(pw, ph, pd);
-    glTexCoord3f(px, py, nz); glVertex3f(pw, nh, pd);
+    glTexCoord3d(px, py, pz); glVertex3d(pw, nh, nd);
+    glTexCoord3d(px, ny, pz); glVertex3d(pw, ph, nd);
+    glTexCoord3d(px, ny, nz); glVertex3d(pw, ph, pd);
+    glTexCoord3d(px, py, nz); glVertex3d(pw, nh, pd);
     glEnd();
 
     glBegin(GL_QUADS); // FACE_LEFT
-    glTexCoord3f(nx, py, nz); glVertex3f(nw, nh, pd);
-    glTexCoord3f(nx, ny, nz); glVertex3f(nw, ph, pd);
-    glTexCoord3f(nx, ny, pz); glVertex3f(nw, ph, nd);
-    glTexCoord3f(nx, py, pz); glVertex3f(nw, nh, nd);
+    glTexCoord3d(nx, py, nz); glVertex3d(nw, nh, pd);
+    glTexCoord3d(nx, ny, nz); glVertex3d(nw, ph, pd);
+    glTexCoord3d(nx, ny, pz); glVertex3d(nw, ph, nd);
+    glTexCoord3d(nx, py, pz); glVertex3d(nw, nh, nd);
     glEnd();
 
     glBegin(GL_QUADS); // FACE_TOP
-    glTexCoord3f(nx, py, nz); glVertex3f(pw, ph, pd);
-    glTexCoord3f(nx, py, pz); glVertex3f(pw, ph, nd);
-    glTexCoord3f(px, py, pz); glVertex3f(nw, ph, nd);
-    glTexCoord3f(px, py, nz); glVertex3f(nw, ph, pd);
+    glTexCoord3d(nx, py, nz); glVertex3d(pw, ph, pd);
+    glTexCoord3d(nx, py, pz); glVertex3d(pw, ph, nd);
+    glTexCoord3d(px, py, pz); glVertex3d(nw, ph, nd);
+    glTexCoord3d(px, py, nz); glVertex3d(nw, ph, pd);
     glEnd();
 
     glBegin(GL_QUADS); // FACE_BOTTOM
-    glTexCoord3f(nx, ny, pz); glVertex3f(pw, nh, nd);
-    glTexCoord3f(nx, ny, nz); glVertex3f(pw, nh, pd);
-    glTexCoord3f(px, ny, nz); glVertex3f(nw, nh, pd);
-    glTexCoord3f(px, ny, pz); glVertex3f(nw, nh, nd);
+    glTexCoord3d(nx, ny, pz); glVertex3d(pw, nh, nd);
+    glTexCoord3d(nx, ny, nz); glVertex3d(pw, nh, pd);
+    glTexCoord3d(px, ny, nz); glVertex3d(nw, nh, pd);
+    glTexCoord3d(px, ny, pz); glVertex3d(nw, nh, nd);
     glEnd();
 
     glBegin(GL_QUADS); // FACE_FRONT
-    glTexCoord3f(nx, py, pz); glVertex3f(pw, nh, pd);
-    glTexCoord3f(nx, ny, pz); glVertex3f(pw, ph, pd);
-    glTexCoord3f(px, ny, pz); glVertex3f(nw, ph, pd);
-    glTexCoord3f(px, py, pz); glVertex3f(nw, nh, pd);
+    glTexCoord3d(nx, py, pz); glVertex3d(pw, nh, pd);
+    glTexCoord3d(nx, ny, pz); glVertex3d(pw, ph, pd);
+    glTexCoord3d(px, ny, pz); glVertex3d(nw, ph, pd);
+    glTexCoord3d(px, py, pz); glVertex3d(nw, nh, pd);
     glEnd();
 
     glBegin(GL_QUADS); // FACE_BACK
-    glTexCoord3f(px, py, nz); glVertex3f(nw, nh, nd);
-    glTexCoord3f(px, ny, nz); glVertex3f(nw, ph, nd);
-    glTexCoord3f(nx, ny, nz); glVertex3f(pw, ph, nd);
-    glTexCoord3f(nx, py, nz); glVertex3f(pw, nh, nd);
+    glTexCoord3d(px, py, nz); glVertex3d(nw, nh, nd);
+    glTexCoord3d(px, ny, nz); glVertex3d(nw, ph, nd);
+    glTexCoord3d(nx, ny, nz); glVertex3d(pw, ph, nd);
+    glTexCoord3d(nx, py, nz); glVertex3d(pw, nh, nd);
     glEnd();
 
     glDisable(GL_BLEND);

@@ -23,9 +23,9 @@ SkyBox::~SkyBox()
 
 void SkyBox::initialize()
 {
-    GLenum cubeMapTarget[6] = {GL_TEXTURE_CUBE_MAP_POSITIVE_X, GL_TEXTURE_CUBE_MAP_NEGATIVE_X,
+    GLenum cubeMapTarget[6] = { GL_TEXTURE_CUBE_MAP_POSITIVE_X, GL_TEXTURE_CUBE_MAP_NEGATIVE_X,
             GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GL_TEXTURE_CUBE_MAP_NEGATIVE_Y,
-            GL_TEXTURE_CUBE_MAP_POSITIVE_Z, GL_TEXTURE_CUBE_MAP_NEGATIVE_Z};
+            GL_TEXTURE_CUBE_MAP_POSITIVE_Z, GL_TEXTURE_CUBE_MAP_NEGATIVE_Z };
 
     QImage textureImage[6];
     textureImage[FACE_RIGHT] = QGLWidget::convertToGLFormat(QImage(":/skybox/skybox-right"));
@@ -73,8 +73,8 @@ void SkyBox::finalize()
 
 void SkyBox::drawSkyBox()
 {
-    float n = -10.0 * sqrt(2.0);
-    float p = +10.0 * sqrt(2.0);
+    double n = -10.0 * sqrt(2.0);
+    double p = +10.0 * sqrt(2.0);
 
     glBindTexture(GL_TEXTURE_CUBE_MAP, cubeMapTextureID);
     glColor3f(1.0, 1.0, 1.0);

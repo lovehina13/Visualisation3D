@@ -18,20 +18,20 @@ public:
     explicit Picture();
     virtual ~Picture();
 
-    void setDisplayWidth(float size);
-    void setDisplayHeight(float size);
-    void setDisplayDepth(float size);
-    void setDisplaySpacing(float size);
+    void setDisplayWidth(double size);
+    void setDisplayHeight(double size);
+    void setDisplayDepth(double size);
+    void setDisplaySpacing(double size);
 
     void initialize(QString fileName);
     void paint(int itPicture, int nbPictures);
     void finalize();
 
 protected:
-    float widthRatio();
-    float heightRatio();
-    float cropWidthRatio();
-    float cropHeightRatio();
+    double widthRatio();
+    double heightRatio();
+    double cropWidthRatio();
+    double cropHeightRatio();
 
     void initializeFaces(int minWidth, int maxWidth, int minHeight, int maxHeight);
     void drawPicture(int itPicture, int nbPictures);
@@ -41,10 +41,10 @@ private:
     int pictureHeight;
     int cropPictureWidth;
     int cropPictureHeight;
-    float displayWidth;
-    float displayHeight;
-    float displayDepth;
-    float displaySpacing;
+    double displayWidth;
+    double displayHeight;
+    double displayDepth;
+    double displaySpacing;
     QImage textureImage;
     GLuint cubeMapTextureID;
 

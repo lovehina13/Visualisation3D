@@ -23,22 +23,22 @@ Picture::~Picture()
     finalize();
 }
 
-void Picture::setDisplayWidth(float size)
+void Picture::setDisplayWidth(double size)
 {
     displayWidth = size;
 }
 
-void Picture::setDisplayHeight(float size)
+void Picture::setDisplayHeight(double size)
 {
     displayHeight = size;
 }
 
-void Picture::setDisplayDepth(float size)
+void Picture::setDisplayDepth(double size)
 {
     displayDepth = size;
 }
 
-void Picture::setDisplaySpacing(float size)
+void Picture::setDisplaySpacing(double size)
 {
     displaySpacing = size;
 }
@@ -53,12 +53,12 @@ void Picture::initialize(QString fileName)
     {
         QPixmap pixmap = QPixmap::fromImage(textureImage);
         QGraphicsPixmapItem* item = new QGraphicsPixmapItem(pixmap);
-        int width = item->opaqueArea().boundingRect().width();
-        int height = item->opaqueArea().boundingRect().height();
-        int minWidth = item->opaqueArea().boundingRect().left();
-        int maxWidth = item->opaqueArea().boundingRect().right();
-        int minHeight = item->opaqueArea().boundingRect().top();
-        int maxHeight = item->opaqueArea().boundingRect().bottom();
+        int width = static_cast<int>(item->opaqueArea().boundingRect().width());
+        int height = static_cast<int>(item->opaqueArea().boundingRect().height());
+        int minWidth = static_cast<int>(item->opaqueArea().boundingRect().left());
+        int maxWidth = static_cast<int>(item->opaqueArea().boundingRect().right());
+        int minHeight = static_cast<int>(item->opaqueArea().boundingRect().top());
+        int maxHeight = static_cast<int>(item->opaqueArea().boundingRect().bottom());
 
         pictureWidth = textureImage.width();
         pictureHeight = textureImage.height();
@@ -84,24 +84,26 @@ void Picture::finalize()
     glDeleteTextures(1, &cubeMapTextureID);
 }
 
-float Picture::widthRatio()
+double Picture::widthRatio()
 {
-    return (float) pictureWidth / (float) qMax(pictureWidth, pictureHeight);
+    return static_cast<double>(pictureWidth)
+            / static_cast<double>(qMax(pictureWidth, pictureHeight));
 }
 
-float Picture::heightRatio()
+double Picture::heightRatio()
 {
-    return (float) pictureHeight / (float) qMax(pictureWidth, pictureHeight);
+    return static_cast<double>(pictureHeight)
+            / static_cast<double>(qMax(pictureWidth, pictureHeight));
 }
 
-float Picture::cropWidthRatio()
+double Picture::cropWidthRatio()
 {
-    return (float) cropPictureWidth / (float) pictureWidth;
+    return static_cast<double>(cropPictureWidth) / static_cast<double>(pictureWidth);
 }
 
-float Picture::cropHeightRatio()
+double Picture::cropHeightRatio()
 {
-    return (float) cropPictureHeight / (float) pictureHeight;
+    return static_cast<double>(cropPictureHeight) / static_cast<double>(pictureHeight);
 }
 
 void Picture::initializeFaces(int minWidth, int maxWidth, int minHeight, int maxHeight)
@@ -175,25 +177,25 @@ void Picture::initializeFaces(int minWidth, int maxWidth, int minHeight, int max
 
 void Picture::drawPicture(int itPicture, int nbPictures)
 {
-    float n = -1.0;
-    float p = +1.0;
-    float nx = n;
-    float px = p;
-    float ny = n;
-    float py = p;
-    float nz = n;
-    float pz = p;
-    float nw = -displayWidth * widthRatio() * cropWidthRatio();
-    float pw = +displayWidth * widthRatio() * cropWidthRatio();
-    float nh = -displayHeight * heightRatio() * cropHeightRatio();
-    float ph = +displayHeight * heightRatio() * cropHeightRatio();
-    float nd = -displayDepth;
-    float pd = +displayDepth;
+    double n = -1.0;
+    double p = +1.0;
+    double nx = n;
+    double px = p;
+    double ny = n;
+    double py = p;
+    double nz = n;
+    double pz = p;
+    double nw = -displayWidth * widthRatio() * cropWidthRatio();
+    double pw = +displayWidth * widthRatio() * cropWidthRatio();
+    double nh = -displayHeight * heightRatio() * cropHeightRatio();
+    double ph = +displayHeight * heightRatio() * cropHeightRatio();
+    double nd = -displayDepth;
+    double pd = +displayDepth;
 
     if (nbPictures > 1)
     {
-        float subDepth = (displayDepth * 2.0) / (float) nbPictures;
-        float subSpacing = displaySpacing * subDepth;
+        double subDepth = (displayDepth * 2.0) / static_cast<double>(nbPictures);
+        double subSpacing = displaySpacing * subDepth;
         nd = -displayDepth + subDepth * itPicture + (subSpacing / 2.0);
         pd = -displayDepth + subDepth * (itPicture + 1) - (subSpacing / 2.0);
     }

@@ -55,7 +55,7 @@ void GLWidget::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    float zoom = (float) zoomScale / 10.0;
+    double zoom = static_cast<double>(zoomScale) / 10.0;
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glOrtho(-10.0 / zoom, +10.0 / zoom, -10.0 / zoom, +10.0 / zoom, -100.0, +100.0);
@@ -63,9 +63,9 @@ void GLWidget::paintGL()
 
     glLoadIdentity();
     glTranslatef(0.0, 0.0, -10.0);
-    glRotatef((float) xRotation, 1.0, 0.0, 0.0);
-    glRotatef((float) yRotation, 0.0, 1.0, 0.0);
-    glRotatef((float) zRotation, 0.0, 0.0, 1.0);
+    glRotatef(static_cast<double>(xRotation), 1.0, 0.0, 0.0);
+    glRotatef(static_cast<double>(yRotation), 0.0, 1.0, 0.0);
+    glRotatef(static_cast<double>(zRotation), 0.0, 0.0, 1.0);
 
     skyBox->paint();
 
@@ -113,7 +113,7 @@ void GLWidget::paintGL()
 
     if (picturesRotation > 0)
     {
-        glRotatef(360.0 - (float) picturesRotation, 0.0, 0.0, 1.0);
+        glRotatef(360.0 - static_cast<double>(picturesRotation), 0.0, 0.0, 1.0);
     }
 
     for (QList<Picture*>::const_iterator itPicture = pictures.begin(); itPicture != pictures.end();
@@ -126,7 +126,7 @@ void GLWidget::paintGL()
 void GLWidget::resizeGL(int width, int height)
 {
     int side = qMin(width, height);
-    float zoom = (float) zoomScale / 10.0;
+    double zoom = static_cast<double>(zoomScale) / 10.0;
     glViewport((width - side) / 2, (height - side) / 2, side, side);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
@@ -255,7 +255,7 @@ void GLWidget::setDisplayWidth(int size)
     for (QList<Picture*>::const_iterator itPicture = pictures.begin(); itPicture != pictures.end();
             itPicture++)
     {
-        (*itPicture)->setDisplayWidth((float) size / 10.0);
+        (*itPicture)->setDisplayWidth(static_cast<double>(size) / 10.0);
     }
     updateGL();
 }
@@ -265,7 +265,7 @@ void GLWidget::setDisplayHeight(int size)
     for (QList<Picture*>::const_iterator itPicture = pictures.begin(); itPicture != pictures.end();
             itPicture++)
     {
-        (*itPicture)->setDisplayHeight((float) size / 10.0);
+        (*itPicture)->setDisplayHeight(static_cast<double>(size) / 10.0);
     }
     updateGL();
 }
@@ -275,7 +275,7 @@ void GLWidget::setDisplayDepth(int size)
     for (QList<Picture*>::const_iterator itPicture = pictures.begin(); itPicture != pictures.end();
             itPicture++)
     {
-        (*itPicture)->setDisplayDepth((float) size / 10.0);
+        (*itPicture)->setDisplayDepth(static_cast<double>(size) / 10.0);
     }
     updateGL();
 }
@@ -285,7 +285,7 @@ void GLWidget::setDisplaySpacing(int size)
     for (QList<Picture*>::const_iterator itPicture = pictures.begin(); itPicture != pictures.end();
             itPicture++)
     {
-        (*itPicture)->setDisplaySpacing((float) size / 100.0);
+        (*itPicture)->setDisplaySpacing(static_cast<double>(size) / 100.0);
     }
     updateGL();
 }

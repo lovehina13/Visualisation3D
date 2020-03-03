@@ -1,7 +1,7 @@
 //==============================================================================
 // Name        : SkyBox.h
 // Author      : Alexis Foerster (alexis.foerster@gmail.com)
-// Version     : 1.1.2 (28/02/2020)
+// Version     : 1.2.0 (03/03/2020)
 // Description : Header file of the SkyBox class
 //==============================================================================
 

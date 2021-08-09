@@ -37,16 +37,16 @@ protected:
     void drawPicture(int itPicture, int nbPictures);
 
 private:
-    int pictureWidth;
-    int pictureHeight;
-    int cropPictureWidth;
-    int cropPictureHeight;
-    double displayWidth;
-    double displayHeight;
-    double displayDepth;
-    double displaySpacing;
-    QImage textureImage;
-    GLuint cubeMapTextureID;
+    int _pictureWidth;
+    int _pictureHeight;
+    int _cropPictureWidth;
+    int _cropPictureHeight;
+    double _displayWidth;
+    double _displayHeight;
+    double _displayDepth;
+    double _displaySpacing;
+    QImage _textureImage;
+    GLuint _cubeMapTextureID;
 
     enum pictureFaces
     {

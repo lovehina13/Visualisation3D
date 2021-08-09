@@ -11,9 +11,9 @@
 #include <QPixmap>
 
 Picture::Picture() :
-        QGLFunctions(), pictureWidth(0), pictureHeight(0), cropPictureWidth(0),
-                cropPictureHeight(0), displayWidth(0.0), displayHeight(0.0), displayDepth(0.0),
-                displaySpacing(0.0), cubeMapTextureID(0)
+        QGLFunctions(), _pictureWidth(0), _pictureHeight(0), _cropPictureWidth(0),
+                _cropPictureHeight(0), _displayWidth(0.0), _displayHeight(0.0), _displayDepth(0.0),
+                _displaySpacing(0.0), _cubeMapTextureID(0)
 {
     // initialize(QString());
 }
@@ -25,33 +25,33 @@ Picture::~Picture()
 
 void Picture::setDisplayWidth(double size)
 {
-    displayWidth = size;
+    _displayWidth = size;
 }
 
 void Picture::setDisplayHeight(double size)
 {
-    displayHeight = size;
+    _displayHeight = size;
 }
 
 void Picture::setDisplayDepth(double size)
 {
-    displayDepth = size;
+    _displayDepth = size;
 }
 
 void Picture::setDisplaySpacing(double size)
 {
-    displaySpacing = size;
+    _displaySpacing = size;
 }
 
 void Picture::initialize(QString fileName)
 {
-    textureImage = QImage(fileName);
+    _textureImage = QImage(fileName);
 
-    glGenTextures(1, &cubeMapTextureID);
+    glGenTextures(1, &_cubeMapTextureID);
 
-    if (textureImage.bits())
+    if (_textureImage.bits())
     {
-        QPixmap pixmap = QPixmap::fromImage(textureImage);
+        QPixmap pixmap = QPixmap::fromImage(_textureImage);
         QGraphicsPixmapItem* item = new QGraphicsPixmapItem(pixmap);
         int width = static_cast<int>(item->opaqueArea().boundingRect().width());
         int height = static_cast<int>(item->opaqueArea().boundingRect().height());
@@ -60,10 +60,10 @@ void Picture::initialize(QString fileName)
         int minHeight = static_cast<int>(item->opaqueArea().boundingRect().top());
         int maxHeight = static_cast<int>(item->opaqueArea().boundingRect().bottom());
 
-        pictureWidth = textureImage.width();
-        pictureHeight = textureImage.height();
-        cropPictureWidth = width;
-        cropPictureHeight = height;
+        _pictureWidth = _textureImage.width();
+        _pictureHeight = _textureImage.height();
+        _cropPictureWidth = width;
+        _cropPictureHeight = height;
         initializeFaces(minWidth, maxWidth, minHeight, maxHeight);
 
         delete item;
@@ -81,34 +81,34 @@ void Picture::paint(int itPicture, int nbPictures)
 
 void Picture::finalize()
 {
-    glDeleteTextures(1, &cubeMapTextureID);
+    glDeleteTextures(1, &_cubeMapTextureID);
 }
 
 double Picture::widthRatio()
 {
-    return static_cast<double>(pictureWidth)
-            / static_cast<double>(qMax(pictureWidth, pictureHeight));
+    return static_cast<double>(_pictureWidth)
+            / static_cast<double>(qMax(_pictureWidth, _pictureHeight));
 }
 
 double Picture::heightRatio()
 {
-    return static_cast<double>(pictureHeight)
-            / static_cast<double>(qMax(pictureWidth, pictureHeight));
+    return static_cast<double>(_pictureHeight)
+            / static_cast<double>(qMax(_pictureWidth, _pictureHeight));
 }
 
 double Picture::cropWidthRatio()
 {
-    return static_cast<double>(cropPictureWidth) / static_cast<double>(pictureWidth);
+    return static_cast<double>(_cropPictureWidth) / static_cast<double>(_pictureWidth);
 }
 
 double Picture::cropHeightRatio()
 {
-    return static_cast<double>(cropPictureHeight) / static_cast<double>(pictureHeight);
+    return static_cast<double>(_cropPictureHeight) / static_cast<double>(_pictureHeight);
 }
 
 void Picture::initializeFaces(int minWidth, int maxWidth, int minHeight, int maxHeight)
 {
-    glBindTexture(GL_TEXTURE_CUBE_MAP, cubeMapTextureID);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, _cubeMapTextureID);
 
     // FACE_RIGHT and FACE_LEFT
     QImage imageFaceRight(maxWidth - minWidth, maxHeight - minHeight, QImage::Format_ARGB32);
@@ -118,8 +118,8 @@ void Picture::initializeFaces(int minWidth, int maxWidth, int minHeight, int max
         for (int y = minHeight; y < maxHeight; y++)
         {
             imageFaceRight.setPixel(x - minWidth, y - minHeight,
-                    textureImage.pixel((maxWidth - 1), y));
-            imageFaceLeft.setPixel(x - minWidth, y - minHeight, textureImage.pixel(minWidth, y));
+                    _textureImage.pixel((maxWidth - 1), y));
+            imageFaceLeft.setPixel(x - minWidth, y - minHeight, _textureImage.pixel(minWidth, y));
         }
     }
     imageFaceRight = QGLWidget::convertToGLFormat(imageFaceRight);
@@ -137,9 +137,9 @@ void Picture::initializeFaces(int minWidth, int maxWidth, int minHeight, int max
         for (int y = minHeight; y < maxHeight; y++)
         {
             imageFaceTop.setPixel(x - minWidth, y - minHeight,
-                    textureImage.pixel((minWidth + maxWidth - 1) - x, minHeight));
+                    _textureImage.pixel((minWidth + maxWidth - 1) - x, minHeight));
             imageFaceBottom.setPixel(x - minWidth, y - minHeight,
-                    textureImage.pixel((minWidth + maxWidth - 1) - x, (maxHeight - 1)));
+                    _textureImage.pixel((minWidth + maxWidth - 1) - x, (maxHeight - 1)));
         }
     }
     imageFaceTop = QGLWidget::convertToGLFormat(imageFaceTop);
@@ -157,8 +157,8 @@ void Picture::initializeFaces(int minWidth, int maxWidth, int minHeight, int max
         for (int y = minHeight; y < maxHeight; y++)
         {
             imageFaceFront.setPixel(x - minWidth, y - minHeight,
-                    textureImage.pixel((minWidth + maxWidth - 1) - x, y));
-            imageFaceBack.setPixel(x - minWidth, y - minHeight, textureImage.pixel(x, y));
+                    _textureImage.pixel((minWidth + maxWidth - 1) - x, y));
+            imageFaceBack.setPixel(x - minWidth, y - minHeight, _textureImage.pixel(x, y));
         }
     }
     imageFaceFront = QGLWidget::convertToGLFormat(imageFaceFront);
@@ -185,22 +185,22 @@ void Picture::drawPicture(int itPicture, int nbPictures)
     double py = p;
     double nz = n;
     double pz = p;
-    double nw = -displayWidth * widthRatio() * cropWidthRatio();
-    double pw = +displayWidth * widthRatio() * cropWidthRatio();
-    double nh = -displayHeight * heightRatio() * cropHeightRatio();
-    double ph = +displayHeight * heightRatio() * cropHeightRatio();
-    double nd = -displayDepth;
-    double pd = +displayDepth;
+    double nw = -_displayWidth * widthRatio() * cropWidthRatio();
+    double pw = +_displayWidth * widthRatio() * cropWidthRatio();
+    double nh = -_displayHeight * heightRatio() * cropHeightRatio();
+    double ph = +_displayHeight * heightRatio() * cropHeightRatio();
+    double nd = -_displayDepth;
+    double pd = +_displayDepth;
 
     if (nbPictures > 1)
     {
-        double subDepth = (displayDepth * 2.0) / static_cast<double>(nbPictures);
-        double subSpacing = displaySpacing * subDepth;
-        nd = -displayDepth + subDepth * itPicture + (subSpacing / 2.0);
-        pd = -displayDepth + subDepth * (itPicture + 1) - (subSpacing / 2.0);
+        double subDepth = (_displayDepth * 2.0) / static_cast<double>(nbPictures);
+        double subSpacing = _displaySpacing * subDepth;
+        nd = -_displayDepth + subDepth * itPicture + (subSpacing / 2.0);
+        pd = -_displayDepth + subDepth * (itPicture + 1) - (subSpacing / 2.0);
     }
 
-    glBindTexture(GL_TEXTURE_CUBE_MAP, cubeMapTextureID);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, _cubeMapTextureID);
     glColor3d(1.0, 1.0, 1.0);
 
     glEnable(GL_BLEND);

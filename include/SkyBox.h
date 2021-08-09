@@ -24,7 +24,7 @@ protected:
     void drawSkyBox();
 
 private:
-    GLuint cubeMapTextureID;
+    GLuint _cubeMapTextureID;
 
     enum skyBoxFaces
     {

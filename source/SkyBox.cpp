@@ -11,7 +11,7 @@
 #include <QImage>
 
 SkyBox::SkyBox() :
-        QGLFunctions(), cubeMapTextureID(0)
+        QGLFunctions(), _cubeMapTextureID(0)
 {
     // initialize();
 }
@@ -35,9 +35,9 @@ void SkyBox::initialize()
     textureImage[FACE_FRONT] = QGLWidget::convertToGLFormat(QImage(":/skybox/skybox-front"));
     textureImage[FACE_BACK] = QGLWidget::convertToGLFormat(QImage(":/skybox/skybox-back"));
 
-    glGenTextures(1, &cubeMapTextureID);
+    glGenTextures(1, &_cubeMapTextureID);
 
-    glBindTexture(GL_TEXTURE_CUBE_MAP, cubeMapTextureID);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, _cubeMapTextureID);
     for (int face = 0; face < 6; face++)
     {
         if (textureImage[face].bits())
@@ -68,7 +68,7 @@ void SkyBox::paint()
 
 void SkyBox::finalize()
 {
-    glDeleteTextures(1, &cubeMapTextureID);
+    glDeleteTextures(1, &_cubeMapTextureID);
 }
 
 void SkyBox::drawSkyBox()
@@ -76,7 +76,7 @@ void SkyBox::drawSkyBox()
     double n = -10.0 * sqrt(2.0);
     double p = +10.0 * sqrt(2.0);
 
-    glBindTexture(GL_TEXTURE_CUBE_MAP, cubeMapTextureID);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, _cubeMapTextureID);
     glColor3d(1.0, 1.0, 1.0);
 
     glBegin(GL_QUADS); // FACE_RIGHT

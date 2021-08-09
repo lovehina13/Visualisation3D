@@ -57,15 +57,15 @@ signals:
     void zoomScaleChanged(int scale);
 
 private:
-    int picturesDepth;
-    int picturesRotation;
-    int xRotation;
-    int yRotation;
-    int zRotation;
-    int zoomScale;
-    QPoint lastPosition;
-    SkyBox* skyBox;
-    QList<Picture*> pictures;
+    int _picturesDepth;
+    int _picturesRotation;
+    int _xRotation;
+    int _yRotation;
+    int _zRotation;
+    int _zoomScale;
+    QPoint _lastPosition;
+    SkyBox* _skyBox;
+    QList<Picture*> _pictures;
 
     enum picturesDepths
     {

@@ -9,12 +9,12 @@
 #include "ui_DocumentationWindow.h"
 
 DocumentationWindow::DocumentationWindow(QWidget* parent) :
-        QDialog(parent), ui(new Ui::DocumentationWindow)
+        QDialog(parent), _ui(new Ui::DocumentationWindow)
 {
-    this->ui->setupUi(this);
+    _ui->setupUi(this);
 }
 
 DocumentationWindow::~DocumentationWindow()
 {
-    delete this->ui;
+    delete _ui;
 }

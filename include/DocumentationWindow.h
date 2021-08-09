@@ -25,7 +25,7 @@ public:
     virtual ~DocumentationWindow();
 
 private:
-    Ui::DocumentationWindow* ui;
+    Ui::DocumentationWindow* _ui;
 };
 
 #endif /* DOCUMENTATIONWINDOW_H */

@@ -25,7 +25,7 @@ public:
     virtual ~DocumentationWindow() override;
 
 private:
-    Ui::DocumentationWindow* _ui;
+    Ui::DocumentationWindow* _ui { nullptr };
 };
 
 #endif /* DOCUMENTATIONWINDOW_H */

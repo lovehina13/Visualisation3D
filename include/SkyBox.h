@@ -13,7 +13,7 @@
 class SkyBox : public QGLFunctions
 {
 public:
-    explicit SkyBox();
+    SkyBox();
     virtual ~SkyBox();
 
     void initialize();
@@ -24,12 +24,12 @@ protected:
     void drawSkyBox();
 
 private:
-    GLuint _cubeMapTextureID;
-
-    enum skyBoxFaces
+    enum SkyBoxFace
     {
         FACE_RIGHT, FACE_LEFT, FACE_TOP, FACE_BOTTOM, FACE_FRONT, FACE_BACK
     };
+
+    GLuint _cubeMapTextureID { 0 };
 };
 
 #endif /* SKYBOX_H */

@@ -11,7 +11,7 @@
 #include <QImage>
 
 SkyBox::SkyBox() :
-        QGLFunctions(), _cubeMapTextureID(0)
+        QGLFunctions()
 {
     // initialize();
 }

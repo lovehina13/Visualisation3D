@@ -9,8 +9,7 @@
 #include <QString>
 
 GLWidget::GLWidget(QWidget* parent) :
-        QGLWidget(parent), _picturesDepth(DEPTH_Z), _picturesRotation(0), _xRotation(0),
-                _yRotation(0), _zRotation(0), _zoomScale(10), _skyBox(new SkyBox())
+        QGLWidget(parent), _skyBox(new SkyBox())
 {
 }
 
@@ -188,9 +187,9 @@ static void qNormalizeScale(int& scale)
 
 void GLWidget::setPicturesDepth(int depth)
 {
-    if (depth != _picturesDepth)
+    if (static_cast<PicturesDepth>(depth) != _picturesDepth)
     {
-        _picturesDepth = depth;
+        _picturesDepth = static_cast<PicturesDepth>(depth);
         emit picturesDepthChanged(depth);
         updateGL();
     }

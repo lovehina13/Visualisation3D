@@ -57,20 +57,20 @@ signals:
     void zoomScaleChanged(int scale);
 
 private:
-    int _picturesDepth;
-    int _picturesRotation;
-    int _xRotation;
-    int _yRotation;
-    int _zRotation;
-    int _zoomScale;
-    QPoint _lastPosition;
-    SkyBox* _skyBox;
-    QList<Picture*> _pictures;
-
-    enum picturesDepths
+    enum PicturesDepth
     {
         DEPTH_X, DEPTH_Y, DEPTH_Z, DEPTH_X_INV, DEPTH_Y_INV, DEPTH_Z_INV
     };
+
+    PicturesDepth _picturesDepth { DEPTH_Z };
+    int _picturesRotation { 0 };
+    int _xRotation { 0 };
+    int _yRotation { 0 };
+    int _zRotation { 0 };
+    int _zoomScale { 0 };
+    QPoint _lastPosition;
+    SkyBox* _skyBox { nullptr };
+    QList<Picture*> _pictures;
 };
 
 #endif /* GLWIDGET_H */

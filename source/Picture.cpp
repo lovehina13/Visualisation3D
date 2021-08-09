@@ -11,9 +11,7 @@
 #include <QPixmap>
 
 Picture::Picture() :
-        QGLFunctions(), _pictureWidth(0), _pictureHeight(0), _cropPictureWidth(0),
-                _cropPictureHeight(0), _displayWidth(0.0), _displayHeight(0.0), _displayDepth(0.0),
-                _displaySpacing(0.0), _cubeMapTextureID(0)
+        QGLFunctions()
 {
     // initialize(QString());
 }

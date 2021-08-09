@@ -31,7 +31,7 @@ public slots:
     void on_actionAbout_triggered();
 
 private:
-    Ui::MainWindow* _ui;
+    Ui::MainWindow* _ui { nullptr };
 };
 
 #endif /* MAINWINDOW_H */

@@ -22,7 +22,7 @@ class DocumentationWindow : public QDialog
 
 public:
     explicit DocumentationWindow(QWidget* parent = nullptr);
-    virtual ~DocumentationWindow();
+    virtual ~DocumentationWindow() override;
 
 private:
     Ui::DocumentationWindow* _ui;

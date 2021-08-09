@@ -22,7 +22,7 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget* parent = nullptr);
-    virtual ~MainWindow();
+    virtual ~MainWindow() override;
 
 public slots:
     void on_actionLoad_triggered();

@@ -160,11 +160,11 @@ void GLWidget::mouseMoveEvent(QMouseEvent* event)
 
 void GLWidget::wheelEvent(QWheelEvent* event)
 {
-    if (event->delta() > 0)
+    if (event->angleDelta().y() > 0)
     {
         setZoomScale(_zoomScale + 1);
     }
-    else if (event->delta() < 0)
+    else if (event->angleDelta().y() < 0)
     {
         setZoomScale(_zoomScale - 1);
     }

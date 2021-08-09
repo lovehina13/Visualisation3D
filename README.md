@@ -12,6 +12,6 @@ Les fonctionnalités ultérieures de l'application seront les suivantes :
 
  - Fonctionnalités de coupes.
 
-L'application est réalisée en C++11 et [Qt 4.8.7](https://download.qt.io/archive/qt/4.8/4.8.7/).
+L'application est réalisée en C++20 et [Qt 5.15.2](https://download.qt.io/archive/qt/5.15/5.15.2/).
 
 ![](doc/Visualisation3D.png "Visualisation3D")
